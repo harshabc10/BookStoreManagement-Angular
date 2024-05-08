@@ -1,0 +1,13 @@
+<div class="book-details-page">
+    <div class="book-details-container">
+      <img [src]="book.imagePath" alt="Book Image" class="book-image-large">
+      <div class="book-info">
+        <h1 class="book-title">{{ book.title }}</h1>
+        <p class="book-author">{{ book.author }}</p>
+        <p class="book-description">{{ book.description }}</p>
+        <p class="book-price">Rs. {{ book.price }}</p>
+        <p class="book-quantity">In Stock: {{ book.quantity }}</p>
+      </div>
+    </div>
+  </div>
+  

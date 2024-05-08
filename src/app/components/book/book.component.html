@@ -1,0 +1,20 @@
+<div class="book-outer-container">
+  <div *ngFor="let book of BookObjList" class="book-container">
+    <div class="book-image-background-container">
+      <img src="{{ book?.imagePath }}" class="book-image" />
+    </div>
+
+    <div class="book-details">
+      <span class="book-title"><b>{{ book?.title }}</b></span>
+
+      <span class="book-author">{{ book?.author }}</span>
+
+      <div class="quantity-price">
+        <span class="book-rating">4.5 *</span>
+        <span>{{ book?.quantity }}</span>
+      </div>
+
+      <span class="book-price"><b>Rs. {{ book?.price }}</b></span>
+    </div>
+  </div>
+</div>
