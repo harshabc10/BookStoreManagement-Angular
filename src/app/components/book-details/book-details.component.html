@@ -1,13 +1,37 @@
-<div class="book-details-page">
-    <div class="book-details-container">
-      <img [src]="book.imagePath" alt="Book Image" class="book-image-large">
-      <div class="book-info">
-        <h1 class="book-title">{{ book.title }}</h1>
-        <p class="book-author">{{ book.author }}</p>
-        <p class="book-description">{{ book.description }}</p>
-        <p class="book-price">Rs. {{ book.price }}</p>
-        <p class="book-quantity">In Stock: {{ book.quantity }}</p>
-      </div>
+<div class="bookdetails-outer-cnt">
+    <div class="back-to-dashbaord">
+      <a routerLink="/dashboard/books"><h3>Home</h3></a>
+      <span> /Books </span>
+      
+    </div>
+    
+    <div *ngIf="selectedBook" class="book-details-cnt">
+        <div class="book-image-and-options">
+            <div class="book-image">
+               <img src="{{selectedBook.imagePath}}" height="300px" width="220px">
+            </div>
+            <div class="options">
+                <button mat-flat-button class="cart-button">ADD TO BAG</button>
+                
+                <button mat-flat-button class="wishlist-button"> WISHLIST</button>
+            </div>
+        </div>
+
+        <div class="book-details">
+            <span><h2>{{selectedBook.title}}</h2></span>
+            <span>by {{selectedBook.author}}</span>
+            <div class="rating-quantity">
+              <span class="rating">4.5 &#9733;</span>
+              <span>({{selectedBook.quantity}})</span>
+            </div>
+            <span><b>Rs. {{selectedBook.price}} </b><del>Rs. 50</del></span>
+            <hr>
+            <p style="margin: 0px;">Book details</p>
+            <span><b>{{selectedBook.description}}</b></span>
+            <hr>
+            <span><b>Customer FeedBack</b></span>
+            <span class="stars">  &#9733; &#9733; &#9733; &#9733; &#9733;</span>
+        </div>
+      <!-- Display other book details as needed -->
     </div>
   </div>
-  

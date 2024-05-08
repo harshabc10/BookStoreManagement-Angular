@@ -4,5 +4,6 @@ export interface BookObj {
     author?: string;
     imagePath?:string;
     price?:number;
+    description?:string;
     quantity?:number;
   }

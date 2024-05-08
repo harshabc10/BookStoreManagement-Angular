@@ -10,6 +10,7 @@ import { BooksContainerComponent } from './components/books-container/books-cont
 import { BookComponent } from './components/book/book.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 
 
@@ -20,7 +21,8 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     BooksContainerComponent,
     BookComponent,
     DashboardComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    CartDetailsComponent
   ],
   imports: [
     BrowserModule,

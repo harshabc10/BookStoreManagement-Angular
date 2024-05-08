@@ -1,6 +1,6 @@
 <div class="book-outer-container">
   <div *ngFor="let book of BookObjList" class="book-container">
-    <div class="book-image-background-container">
+    <div class="book-image-background-container" (click)="handleBook(book)">
       <img src="{{ book?.imagePath }}" class="book-image" />
     </div>
 

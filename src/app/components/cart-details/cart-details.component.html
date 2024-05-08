@@ -1,0 +1,50 @@
+<div class="cart-outer-cnt">
+
+    <div class="back-to-dashbaord">
+        <span routerLink="/dashboard/books"><h3>Home/Books</h3></span>
+        
+      </div>
+    <div *ngIf="selectedBook "  class="cart-details-container">
+        <!-- Book Details -->
+        <div class="cart-section">
+          <h3>My cart</h3>
+          <div class="book-details">
+            <div class="book-item">
+              <img src="{{selectedBook.imagePath}}" alt="Book Cover">
+              <div class="book-info">
+                <h4>Title: {{selectedBook.title}}</h4>
+                <p>Author: {{selectedBook.author}}</p>
+                <p>Price: Rs. {{selectedBook.price}} <del>Rs. 50</del></p>
+                <p>Quantity:{{selectedBook.quantity}}</p>
+              </div>
+              <button class="place-order-button">Place Order</button>
+            </div>
+            <!-- Add more book items here -->
+          </div>
+    
+        </div>
+      
+        <!-- Address Details -->
+        <div class="cart-section" (click)="toggleAddressDetails()">
+          <h3>Address Details</h3>
+          <div class="address-details" *ngIf="showAddressDetails">
+            <p>Name: John Doe</p>
+            <p>Address: 123 Street, City</p>
+            <p>Phone: +1234567890</p>
+            <p>Email: johndoe@gamil.com</p>
+          </div>
+        </div>
+      
+        <!-- Order Summary -->
+        <div class="cart-section" (click)="toggleOrderSummary()">
+          <h3>Order Summary</h3>
+          <div class="order-summary" *ngIf="showOrderSummary">
+            <p>Subtotal: $10.00</p>
+            <p>Shipping: $5.00</p>
+            <p>Total: $15.00</p>
+          </div>
+        </div>
+      </div>
+</div>
+
+  

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BookService } from 'src/app/services/book-service/book.service';
 import { BookObj } from 'src/assets/booksInterface';
 
 @Component({
@@ -8,9 +10,14 @@ import { BookObj } from 'src/assets/booksInterface';
 })
 export class BookComponent implements OnInit {
   @Input() BookObjList !:BookObj[]
-  constructor() { }
+  constructor(private bookService: BookService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  handleBook(book:BookObj){
+    this.bookService.changeState(book)
+     this.router.navigate(["/dashboard/bookdetails"])
+
+  }
 }

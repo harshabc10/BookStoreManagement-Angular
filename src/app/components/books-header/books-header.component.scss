@@ -1,6 +1,7 @@
 .left-cnt {
     display: flex;
     align-items: center;
+    cursor: pointer;
 
 }
 
@@ -54,6 +55,7 @@
     font-size: 10px;
     gap:5px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .cart{
@@ -64,4 +66,5 @@
     font-size: 10px;
     gap:5px;
     margin-top: 10px;
+    cursor: pointer;
 }
