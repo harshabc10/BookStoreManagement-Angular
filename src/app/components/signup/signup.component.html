@@ -1,0 +1,44 @@
+<div class="container" [formGroup]="signUpForm">
+  
+      <div class="form-container">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>FirstName</mat-label>
+          <input matInput placeholder="Enter your firstName" formControlName="firstName" />
+          <mat-error *ngIf="signUpForm.get('firstName')?.hasError('required')">First Name is required</mat-error>
+                <mat-error *ngIf="signUpForm.get('firstName')?.hasError('pattern')">Incorrect First Name format</mat-error>
+        </mat-form-field>
+        
+      </div>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" formControlName="email" >
+        <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">Email required</mat-error>
+            <mat-error *ngIf="signUpForm.get('email')?.hasError('email')"> Incorrect Email Format</mat-error>
+        
+    </mat-form-field>
+  
+      <div class="form-container">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter your password" formControlName="password"/>
+          <mat-error *ngIf="signUpForm.get('password')?.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="signUpForm.get('password')?.hasError('minlength')">Minimum length of 6 characters is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile Number</mat-label>
+        <input matInput placeholder="Enter your mobile number" formControlName="mobileNumber"
+               pattern="[0-9]*" minlength="10" maxlength="10">
+        <mat-error *ngIf="signUpForm.get('mobileNumber')?.hasError('required')">Mobile number required</mat-error>
+        <mat-error *ngIf="signUpForm.get('mobileNumber')?.hasError('pattern')">Invalid mobile number format (only numbers allowed)</mat-error>
+        <mat-error *ngIf="signUpForm.get('mobileNumber')?.hasError('minlength')">Mobile number must be 10 digits</mat-error>
+        <mat-error *ngIf="signUpForm.get('mobileNumber')?.hasError('maxlength')">Mobile number must be 10 digits</mat-error>
+    </mat-form-field>
+    
+  
+      <div class="button-group">
+        <button class="btn btn-primary" (click)="handleSignUp()">SignUp</button>
+      </div>
+  </div>

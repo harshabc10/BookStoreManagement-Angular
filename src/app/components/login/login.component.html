@@ -1,0 +1,41 @@
+<form class="container" [formGroup]="loginForm">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter your email" formControlName="email" >
+        <mat-error *ngIf="loginControls['email']?.hasError('required')">Email required</mat-error>
+            <mat-error *ngIf="loginControls['email']?.hasError('email')"> Incorrect Email Format</mat-error>
+        
+    </mat-form-field>
+
+    <div class="password">
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter your password" formControlName="password">
+            <mat-error *ngIf="loginControls['password']?.hasError('required')">Password required</mat-error>
+            <mat-error *ngIf="loginControls['password']?.hasError('minlength')">Minimum length is required(6)</mat-error>
+        </mat-form-field>
+        <a href="">Forgot Password</a>
+        
+    </div>
+
+
+    <div class="button-group">
+        <button class="btn btn-primary" (click)="handleLogin()">Login</button>
+    </div>
+
+    <div class="divider">
+        <!-- <mat-divider></mat-divider> -->
+        <p>OR</p>
+    </div>
+
+    <div class="below-btns">
+        <button class="Facebook m-2">
+            Facebook
+        </button>
+        <button class="Google m-2">
+            Google
+        </button>
+    </div>
+    
+</form>

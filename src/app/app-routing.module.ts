@@ -4,8 +4,26 @@ import { BooksContainerComponent } from './components/books-container/books-cont
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 
 const routes: Routes = [
+  {
+    path:'login',
+    component:LoginComponent
+
+  },
+  {
+    path:'signUp',
+    component:SignupComponent
+
+  },
+  {
+    path:'loginSignUp',
+    component:LoginSignupComponent
+
+  },
   {
     path:'dashboard',
     component:DashboardComponent,

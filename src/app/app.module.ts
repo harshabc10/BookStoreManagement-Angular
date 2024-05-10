@@ -11,6 +11,12 @@ import { BookComponent } from './components/book/book.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 
 
 
@@ -22,14 +28,21 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     BookComponent,
     DashboardComponent,
     BookDetailsComponent,
-    CartDetailsComponent
+    CartDetailsComponent,
+    LoginComponent,
+    SignupComponent,
+    LoginSignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule
     
   ],
   providers: [],
