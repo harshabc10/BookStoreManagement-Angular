@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { SEARCH_ICON,PROFILE_ICON,CART_ICON } from 'src/assets/svg-icons';
+import { LoginSignupComponent } from '../login-signup/login-signup.component';
+import { BookService } from 'src/app/services/book-service/book.service';
+import { HttpService } from 'src/app/services/http-service/http.service';
 
 @Component({
   selector: 'app-books-header',
@@ -11,7 +15,12 @@ import { SEARCH_ICON,PROFILE_ICON,CART_ICON } from 'src/assets/svg-icons';
 })
 export class BooksHeaderComponent implements OnInit {
 
-  constructor(private domSanitizer:DomSanitizer,private matIconRegistry:MatIconRegistry) 
+
+
+  loginclick:boolean=false
+  searchString:string=''
+
+  constructor(private domSanitizer:DomSanitizer,private matIconRegistry:MatIconRegistry,private dialog:MatDialog,private bookService: BookService,private httpService:HttpService) 
   { 
     matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON)),
     matIconRegistry.addSvgIconLiteral("profile-icon", domSanitizer.bypassSecurityTrustHtml(PROFILE_ICON)),
@@ -20,6 +29,20 @@ export class BooksHeaderComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    
+     this.httpService.getBooks().subscribe(res=>this.bookService.changeState(res.data))
+  }
+  login(){
+    const dialogRef=this.dialog.open(LoginSignupComponent,{width:'720px',height:'480px'});
+    dialogRef.afterClosed().subscribe(result=>{
+    console.log('The dialog was closed');
+  
+    });
+    this.loginclick=!this.loginclick;
+  }
+
+  handelSerchString(){
+    this.bookService.updateSearchString(this.searchString)
   }
 
 }

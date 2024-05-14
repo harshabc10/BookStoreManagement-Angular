@@ -1,10 +1,10 @@
 <div class="book-outer-container">
-  <div *ngFor="let book of BookObjList" class="book-container">
+  <div *ngFor="let book of BookObjList | search: searchString" class="book-container" >
     <div class="book-image-background-container" (click)="handleBook(book)">
       <img src="{{ book?.imagePath }}" class="book-image" />
     </div>
 
-    <div class="book-details">
+    <div class="book-details" >
       <span class="book-title"><b>{{ book?.title }}</b></span>
 
       <span class="book-author">{{ book?.author }}</span>

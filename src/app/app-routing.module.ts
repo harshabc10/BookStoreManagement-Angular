@@ -33,7 +33,7 @@ const routes: Routes = [
       component:BooksContainerComponent
     },
      {
-      path:'bookdetails',
+      path:'bookdetails/:bookId',
      component:BookDetailsComponent
     },
   {

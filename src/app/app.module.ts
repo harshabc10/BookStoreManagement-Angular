@@ -17,6 +17,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SearchPipe } from './services/pipe/search.pipe';
 
 
 
@@ -31,7 +34,8 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
     CartDetailsComponent,
     LoginComponent,
     SignupComponent,
-    LoginSignupComponent
+    LoginSignupComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { LoginSignupComponent } from './components/login-signup/login-signup.com
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatMenuModule,
+    MatDialogModule
     
   ],
   providers: [],

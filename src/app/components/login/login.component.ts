@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BookService } from 'src/app/services/book-service/book.service';
 import { UserService } from 'src/app/services/user-service/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
   loginForm !:FormGroup 
+  dialogRef!: MatDialogRef<any>;
 
-  constructor(private formBuilder:FormBuilder,private userService: UserService, private router : Router){
+  constructor(private formBuilder:FormBuilder,private userService: UserService, private router : Router,private bookService: BookService){
 
   }
 
@@ -39,8 +43,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userName', res.userName) // Assuming the response includes UserName
         localStorage.setItem('email', res.email)
       
-
-       this.router.navigate(['/dashboard/books'])
+       this.router.navigate(['/dashboard/cart'])
 
     }
     ,err=> console.log(err))

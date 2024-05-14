@@ -11,7 +11,12 @@
                <img src="{{selectedBook.imagePath}}" height="300px" width="220px">
             </div>
             <div class="options">
-                <button mat-flat-button class="cart-button">ADD TO BAG</button>
+                <button mat-flat-button class="cart-button" *ngIf="!addedToBag" (click)="addToBag()">ADD TO BAG</button>
+                <div *ngIf="addedToBag" class="quantity-update">
+                    <span class="symbol" (click)="decreaseCount()">-</span>
+                    <span class="number-of-books">{{ count }}</span>
+                    <span class="symbol" (click)="increaseCount()">+</span>
+                  </div>
                 
                 <button mat-flat-button class="wishlist-button"> WISHLIST</button>
             </div>

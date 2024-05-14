@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BookService } from 'src/app/services/book-service/book.service';
+import { HttpService } from 'src/app/services/http-service/http.service';
 import { BookObj } from 'src/assets/booksInterface';
 
 @Component({
@@ -10,25 +12,35 @@ import { BookObj } from 'src/assets/booksInterface';
 export class CartDetailsComponent implements OnInit {
   showAddressDetails: boolean = false;
   showOrderSummary: boolean = false;
+  selectedBook: BookObj[] = [];
+  cartDetails$!: Observable<any>; // Using definite assignment assertion operator
 
-  selectedBook!: BookObj;
+  token: string | null = null; // Token fetched from local storage
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private httpService: HttpService) {}
+
   toggleAddressDetails() {
     this.showAddressDetails = !this.showAddressDetails;
   }
 
-  // Method to toggle Order Summary visibility
   toggleOrderSummary() {
     this.showOrderSummary = !this.showOrderSummary;
   }
 
   ngOnInit(): void {
-    this.bookService.currentstate.subscribe(res => {
-      this.selectedBook = res;
-    });
-    this.bookService.currentstate.subscribe(res=>console.log(res));
-    
+    this.selectedBook = this.bookService.getCartItems();
+    // Fetch token from local storage
+    this.token = localStorage.getItem('authToken');
+    if (this.token) {
+      // Call getAllCartDetails with the token
+      this.cartDetails$ = this.bookService.getAllCartDetails();
+    } else {
+      console.error('Token not found in local storage.');
+    }
   }
 
+  removeFromCart(book: BookObj) {
+    this.bookService.removeFromCart(book);
+    this.selectedBook = this.bookService.getCartItems();
+  }
 }

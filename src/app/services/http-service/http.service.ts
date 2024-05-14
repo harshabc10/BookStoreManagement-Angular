@@ -16,8 +16,16 @@ export class HttpService {
     return this.http.get<any>('https://localhost:7209/api/Book');
   }
 
-  getCartDetails(token: string): Observable<any> {
-    return this.http.get<any>('https://localhost:7209/api/Cart/GetCartBooks', {headers:this.authHeader});
+  getCartDetails(): Observable<any> {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      // Handle the case where the auth token is not available
+      throw new Error('Authentication token not found in local storage.');
+    }
+    const authHeader = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`
+    });
+    return this.http.get<any>('https://localhost:7209/api/Cart/GetCartBooks', { headers: authHeader });
   }
 
   loginApi(email:string,password:string): Observable<any>{

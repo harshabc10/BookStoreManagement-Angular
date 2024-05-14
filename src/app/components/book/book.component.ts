@@ -10,14 +10,16 @@ import { BookObj } from 'src/assets/booksInterface';
 })
 export class BookComponent implements OnInit {
   @Input() BookObjList !:BookObj[]
+  searchString:string=''
   constructor(private bookService: BookService, private router:Router) { }
 
   ngOnInit(): void {
+    
   }
 
   handleBook(book:BookObj){
-    this.bookService.changeState(book)
-     this.router.navigate(["/dashboard/bookdetails"])
+    // this.bookService.changeState(book)
+     this.router.navigate(["/dashboard/bookdetails", book.bookId])
 
   }
 }
