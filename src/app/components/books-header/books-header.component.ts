@@ -7,6 +7,8 @@ import { SEARCH_ICON,PROFILE_ICON,CART_ICON } from 'src/assets/svg-icons';
 import { LoginSignupComponent } from '../login-signup/login-signup.component';
 import { BookService } from 'src/app/services/book-service/book.service';
 import { HttpService } from 'src/app/services/http-service/http.service';
+import { DataService } from 'src/app/services/data-service/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-header',
@@ -20,7 +22,7 @@ export class BooksHeaderComponent implements OnInit {
   loginclick:boolean=false
   searchString:string=''
 
-  constructor(private domSanitizer:DomSanitizer,private matIconRegistry:MatIconRegistry,private dialog:MatDialog,private bookService: BookService,private httpService:HttpService) 
+  constructor(private domSanitizer:DomSanitizer,private matIconRegistry:MatIconRegistry,private dialog:MatDialog,private dataService: DataService,private httpService:HttpService, private router: Router) 
   { 
     matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON)),
     matIconRegistry.addSvgIconLiteral("profile-icon", domSanitizer.bypassSecurityTrustHtml(PROFILE_ICON)),
@@ -30,7 +32,7 @@ export class BooksHeaderComponent implements OnInit {
   
   ngOnInit(): void {
     
-     this.httpService.getBooks().subscribe(res=>this.bookService.changeState(res.data))
+     this.httpService.getBooks().subscribe(res=>this.dataService.changeState(res.data))
   }
   login(){
     const dialogRef=this.dialog.open(LoginSignupComponent,{width:'720px',height:'480px'});
@@ -42,7 +44,12 @@ export class BooksHeaderComponent implements OnInit {
   }
 
   handelSerchString(){
-    this.bookService.updateSearchString(this.searchString)
+    this.dataService.updateSearchString(this.searchString)
   }
 
+  logOut() {
+    localStorage.clear();
+    this.router.navigate(['/dashboard/books']);
+    
+  }
 }

@@ -1,28 +1,41 @@
 <div class="cart-outer-cnt">
-  <div class="back-to-dashbaord">
-    <span routerLink="/dashboard/books"><h3>Home/Books</h3></span>
+  <div class="back-to-dashboard">
+    <a routerLink="/dashboard/books">
+      <h3>Home</h3>
+    </a>
+    <span>/Books</span>
   </div>
-  <div *ngFor="let item of selectedBook" class="cart-details-container">
-    <!-- Book Details -->
-    <div class="cart-section">
-      <h3>My cart</h3>
-      <div class="book-details">
-        <div class="book-item">
-          <img src="{{ item.imagePath }}" alt="Book Cover" />
-          <div class="book-info">
-            <h4>Title: {{ item.title }}</h4>
-            <p>Author: {{ item.author }}</p>
-            <p>Price: Rs. {{ item.price }} <del>Rs. 50</del></p>
-            <p>Quantity:{{ item.quantity }}</p>
+  
+  <div *ngIf="cartItems$ | async as cartItems; else emptyCart">
+    <div *ngFor="let item of cartItems" class="cart-details-container">
+      <!-- Book Details -->
+      <div class="cart-section">
+        <h3>My cart</h3>
+        <div class="book-details">
+          <div class="book-item">
+            <img [src]="item.imagePath" alt="Book Cover" />
+            <div class="book-info">
+              <h4>Title: {{ item.title }}</h4>
+              <p>Author: {{ item.author }}</p>
+              <p>Price: Rs. {{ item.price }} <del>Rs. 699</del></p>
+              <div class="quantity-update">
+                <span class="symbol" (click)="decreaseCount(item)">-</span>
+                <span class="number-of-books">{{ item.quantity }}</span>
+                <span class="symbol" (click)="increaseCount(item)">+</span>
+              </div>
+            </div>
+            <button class="place-order-button" (click)="removeFromCart(item)">Remove</button>
+            <button class="place-order-button">Place Order</button>
           </div>
-          
-          <button  class="place-order-button"(click)="removeFromCart(item)">Remove</button>
-          <button class="place-order-button">Place Order</button>
         </div>
-        <!-- Add more book items here -->
       </div>
     </div>
   </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty.</p>
+  </ng-template>
+
   <div class="cart-details-container">
     <!-- Address Details -->
     <div class="cart-section" (click)="toggleAddressDetails()">
@@ -31,7 +44,7 @@
         <p>Name: John Doe</p>
         <p>Address: 123 Street, City</p>
         <p>Phone: +1234567890</p>
-        <p>Email: johndoegmail.com</p>
+        <p>Email: johndoe@gmail.com</p>
       </div>
     </div>
 
@@ -39,9 +52,9 @@
     <div class="cart-section" (click)="toggleOrderSummary()">
       <h3>Order Summary</h3>
       <div class="order-summary" *ngIf="showOrderSummary">
-        <p>Subtotal: $10.00</p>
-        <p>Shipping: $5.00</p>
-        <p>Total: $15.00</p>
+        <p>Subtotal: Rs. </p>
+        <p>Shipping: Rs. 50.00</p>
+        <p>Total: Rs. </p>
       </div>
     </div>
   </div>
