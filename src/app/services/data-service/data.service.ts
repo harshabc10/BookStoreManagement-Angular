@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BookObj } from 'src/assets/booksInterface';
 
 @Injectable({
@@ -13,6 +13,7 @@ export class DataService {
   currSearchString = this.searchString.asObservable();
 
   private cartItems: { [bookId: number]: BookObj & { quantity: number } } = {};
+  
   private cartItemsSubject = new BehaviorSubject<(BookObj & { quantity: number })[]>([]);
 
   getCartItems(): Observable<(BookObj & { quantity: number })[]> {
@@ -23,6 +24,12 @@ export class DataService {
   getCartItemCount(): Observable<number> {
     return this.cartItemCount.asObservable();
   }
+  
+
+  clearCart() {
+    this.cartItems = {};
+    this.updateCartItemsSubject();
+  }
 
   addToCart(book: BookObj, quantity: number = 1) {
     if (book.bookId === undefined) {
@@ -32,9 +39,25 @@ export class DataService {
 
     if (this.cartItems[book.bookId]) {
       this.cartItems[book.bookId].quantity += quantity;
+      // Prevent quantity from going below 1
+      if (this.cartItems[book.bookId].quantity < 1) {
+        this.cartItems[book.bookId].quantity = 1;
+      }
     } else {
-      this.cartItems[book.bookId] = { ...book, quantity };
+      this.cartItems[book.bookId] = { ...book, quantity: quantity > 0 ? quantity : 1 };
     }
+    this.updateCartItemsSubject();
+  }
+
+  setCartItems(cartItems: (BookObj & { quantity: number })[]): void {
+    this.cartItems = {};
+    cartItems.forEach(item => {
+      if (item.bookId !== undefined) { // Ensure bookId is not undefined
+        this.cartItems[item.bookId] = item;
+      } else {
+        console.error('Book ID is undefined for item:', item);
+      }
+    });
     this.updateCartItemsSubject();
   }
 
@@ -72,6 +95,22 @@ export class DataService {
 
   updateSearchString(state: string) {
     this.searchString.next(state);
+  }
+
+  //////wishlist//////////
+  private wishlistBooks: any[] = [];
+
+  getWishlistBooks(): Observable<any[]> {
+    return of(this.wishlistBooks);
+  }
+
+  addToWishlist(book: any) {
+    this.wishlistBooks.push(book);
+  }
+
+  removeFromWishlist(bookId: number): Observable<void> {
+    this.wishlistBooks = this.wishlistBooks.filter(book => book.bookId !== bookId);
+    return of();
   }
 
   constructor() {}

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userName', res.userName) // Assuming the response includes UserName
         localStorage.setItem('email', res.email)
       
-       this.router.navigate(['/dashboard/cart'])
+       this.router.navigate(['/dashboard/books'])
 
     }
     ,err=> console.log(err))

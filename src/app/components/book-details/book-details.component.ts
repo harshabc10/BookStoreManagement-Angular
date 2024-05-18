@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { BookService } from 'src/app/services/book-service/book.service';
 import { DataService } from 'src/app/services/data-service/data.service';
 import { BookObj } from 'src/assets/booksInterface';
@@ -14,7 +14,7 @@ export class BookDetailsComponent implements OnInit {
   addedToBag: boolean = false;
   count: number = 1;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute, private bookService: BookService) {}
+  constructor(private dataService: DataService, private route: ActivatedRoute, private bookService: BookService, private router :Router) {}
 
   ngOnInit(): void {
     this.dataService.currentBookList.subscribe(res1 => {
@@ -69,5 +69,10 @@ export class BookDetailsComponent implements OnInit {
         });
       }
     }
+  }
+  addToWishlist() {
+    this.dataService.addToWishlist(this.selectedBook);
+    this.router.navigate(["/dashboard/wishlist"])
+    console.log('Book added to wishlist successfully');
   }
 }

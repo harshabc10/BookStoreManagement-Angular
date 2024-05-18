@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-
-import { SEARCH_ICON,PROFILE_ICON,CART_ICON } from 'src/assets/svg-icons';
+import { SEARCH_ICON, PROFILE_ICON, CART_ICON } from 'src/assets/svg-icons';
 import { LoginSignupComponent } from '../login-signup/login-signup.component';
 import { BookService } from 'src/app/services/book-service/book.service';
 import { HttpService } from 'src/app/services/http-service/http.service';
@@ -16,40 +15,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./books-header.component.scss']
 })
 export class BooksHeaderComponent implements OnInit {
+  loginclick: boolean = false;
+  searchString: string = '';
 
-
-
-  loginclick:boolean=false
-  searchString:string=''
-
-  constructor(private domSanitizer:DomSanitizer,private matIconRegistry:MatIconRegistry,private dialog:MatDialog,private dataService: DataService,private httpService:HttpService, private router: Router) 
-  { 
+  constructor(
+    private domSanitizer: DomSanitizer,
+    private matIconRegistry: MatIconRegistry,
+    private dialog: MatDialog,
+    private dataService: DataService,
+    private httpService: HttpService,
+    private router: Router
+  ) {
     matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON)),
     matIconRegistry.addSvgIconLiteral("profile-icon", domSanitizer.bypassSecurityTrustHtml(PROFILE_ICON)),
     matIconRegistry.addSvgIconLiteral("cart-icon", domSanitizer.bypassSecurityTrustHtml(CART_ICON))
-    
-  }
-  
-  ngOnInit(): void {
-    
-     this.httpService.getBooks().subscribe(res=>this.dataService.changeState(res.data))
-  }
-  login(){
-    const dialogRef=this.dialog.open(LoginSignupComponent,{width:'720px',height:'480px'});
-    dialogRef.afterClosed().subscribe(result=>{
-    console.log('The dialog was closed');
-  
-    });
-    this.loginclick=!this.loginclick;
   }
 
-  handelSerchString(){
-    this.dataService.updateSearchString(this.searchString)
+  ngOnInit(): void {
+    this.httpService.getBooks().subscribe(res => this.dataService.changeState(res.data));
+  }
+
+  login() {
+    const dialogRef = this.dialog.open(LoginSignupComponent, { width: '720px', height: '480px' });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+    this.loginclick = !this.loginclick;
+  }
+
+  handelSerchString() {
+    this.dataService.updateSearchString(this.searchString);
   }
 
   logOut() {
     localStorage.clear();
     this.router.navigate(['/dashboard/books']);
-    
   }
 }

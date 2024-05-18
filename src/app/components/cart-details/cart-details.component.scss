@@ -1,6 +1,27 @@
 .cart-outer-cnt{
     width:100%;
 }
+
+.breadcrumb {
+  padding: 10px 270px;
+}
+
+.breadcrumb a {
+  color: #a80000;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.cart-cnt{
+  display: flex;
+  flex-direction: row;
+  gap: 490px;
+}
+
 .cart-details-container {
     max-width: 800px;
     margin: 0 auto;
@@ -19,6 +40,26 @@
   .del {
     text-decoration: line-through;
   }
+  .loc-icon-cnt{
+    padding: 5px;
+    height: 18%;
+    width: fit-content;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+
+}
+.loc-icon
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: none;
+}
   
   .book-item {
     display: flex;
@@ -29,12 +70,11 @@
     background-color: #007bff;
     margin-top: 109px;
     padding: 5px;
-    border-radius: 20px 20px 20px 20px;
     border: none;
     width: 115px;
     height: 40px;
     cursor: pointer;
-    margin-left: 20px;
+    margin-right: 10px;
 
   }
 
@@ -44,6 +84,14 @@
     margin-right: 10px;
   }
   
+  .number-of-books{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    height: 24px; 
+    width: 40px; 
+    padding-top: 3px;
+}
   .book-info {
     flex-grow: 1;
   }

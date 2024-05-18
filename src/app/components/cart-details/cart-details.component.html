@@ -1,16 +1,25 @@
 <div class="cart-outer-cnt">
-  <div class="back-to-dashboard">
-    <a routerLink="/dashboard/books">
-      <h3>Home</h3>
-    </a>
-    <span>/Books</span>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#" routerLink="/dashboard/books">Home</a> / <a >My Cart</a>
   </div>
-  
-  <div *ngIf="cartItems$ | async as cartItems; else emptyCart">
+
+  <!-- Cart Items -->
+  <ng-container *ngIf="cartItems$ | async as cartItems; else emptyCart">
     <div *ngFor="let item of cartItems" class="cart-details-container">
       <!-- Book Details -->
       <div class="cart-section">
-        <h3>My cart</h3>
+        <div class="cart-cnt">
+          <h3>My cart</h3>
+          <div class="loc-icon-cnt">
+            <span class="loc-icon"> 
+              <mat-icon svgIcon="location-icon"></mat-icon>
+              Harsha,Bengalore,No... 
+              <mat-icon svgIcon="drop-down-icon"></mat-icon>
+            </span>
+          </div>
+        </div>
+        
         <div class="book-details">
           <div class="book-item">
             <img [src]="item.imagePath" alt="Book Cover" />
@@ -22,20 +31,22 @@
                 <span class="symbol" (click)="decreaseCount(item)">-</span>
                 <span class="number-of-books">{{ item.quantity }}</span>
                 <span class="symbol" (click)="increaseCount(item)">+</span>
+                <button (click)="removeFromCart(item)">Remove</button>
               </div>
             </div>
-            <button class="place-order-button" (click)="removeFromCart(item)">Remove</button>
-            <button class="place-order-button">Place Order</button>
+            <button class="place-order-button" (click)="handlePlaceOrder(item)">Place Order</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
+  <!-- Empty Cart Message -->
   <ng-template #emptyCart>
     <p>Your cart is empty.</p>
   </ng-template>
 
+  <!-- Address Details & Order Summary -->
   <div class="cart-details-container">
     <!-- Address Details -->
     <div class="cart-section" (click)="toggleAddressDetails()">

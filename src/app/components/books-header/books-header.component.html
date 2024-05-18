@@ -5,26 +5,26 @@
     </div>
 
     <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search...">
+        <input type="text" class="search-input" placeholder="Search..." (input)="handelSerchString()" [(ngModel)]="searchString">
         <mat-icon class="search-icon" svgIcon="search-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
     </div>
     <div class="profile" [matMenuTriggerFor]="profileMenu">
-    <mat-icon class="profile-icon" svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-    <span>Profile</span>
+        <mat-icon class="profile-icon" svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+        <span>Profile</span>
     </div>
     <div class="cart" routerLink="/dashboard/cart">
-    <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-    <span>Cart</span>
+        <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+        <span>Cart</span>
     </div>
-    
 </div>
 
 <mat-menu #profileMenu>
-        <span>Welcome</span><br>
-        <span>To acsess account and manage orders</span>
-        <button mat-menu-item class="login-btn" (click)="login()">
-        <span >LOGIN/SIGNUP</span></button>
-        <button  mat-menu-item class="login-btn" (click)="logOut()">Logout</button>
-        <div class="order-icon"> My Orders</div>
-        <div class="heart-icon">&#x2764; Wishlist</div>
+    <span>Welcome</span><br>
+    <span>To access account and manage orders</span>
+    <button mat-menu-item class="login-btn" (click)="login()">
+        <span>LOGIN/SIGNUP</span>
+    </button>
+    <button mat-menu-item class="login-btn" (click)="logOut()">Logout</button>
+    <div class="order-icon"> My Orders</div>
+    <div class="heart-icon">&#x2764; Wishlist</div>
 </mat-menu>

@@ -7,6 +7,8 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,11 @@ const routes: Routes = [
 
   },
   {
+    path:'customer',
+    component:CustomerDetailsComponent
+  },
+
+  {
     path:'dashboard',
     component:DashboardComponent,
     children:[
@@ -36,10 +43,16 @@ const routes: Routes = [
       path:'bookdetails/:bookId',
      component:BookDetailsComponent
     },
+
   {
     path:'cart',
     component:CartDetailsComponent
-  }]
+  },
+  {
+    path:'wishlist',
+    component:WishlistComponent
+
+  },]
     },
     {
       path:"rrr",

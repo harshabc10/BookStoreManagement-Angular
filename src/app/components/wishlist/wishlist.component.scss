@@ -1,0 +1,45 @@
+.wishlist-container {
+    padding: 20px;
+  }
+  
+  .breadcrumb {
+    margin-bottom: 10px;
+  }
+  
+  .wishlist-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .wishlist-books {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .book-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .book-image img {
+    height: 100px;
+    width: 80px;
+    margin-right: 20px;
+  }
+  
+  .book-details {
+    flex-grow: 1;
+  }
+  
+  .price del {
+    color: #888;
+  }
+  
+  button[mat-icon-button] {
+    color: #f00;
+  }
+  

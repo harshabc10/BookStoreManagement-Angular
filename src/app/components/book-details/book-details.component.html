@@ -1,9 +1,8 @@
 <div class="bookdetails-outer-cnt">
-    <div class="back-to-dashbaord">
-      <a routerLink="/dashboard/books"><h3>Home</h3></a>
-      <span> /Books </span>
+      <div class="breadcrumb">
+        <a href="#" routerLink="/dashboard/books">Home</a> / <a>Book(01)</a>
+      </div>
       
-    </div>
     
     <div *ngIf="selectedBook" class="book-details-cnt">
         <div class="book-image-and-options">
@@ -18,7 +17,7 @@
                     <span class="symbol" (click)="increaseCount()">+</span>
                   </div>
                 
-                <button mat-flat-button class="wishlist-button"> WISHLIST</button>
+                <button mat-flat-button class="wishlist-button" (click)="addToWishlist()"> WISHLIST</button>
             </div>
         </div>
 
@@ -39,4 +38,4 @@
         </div>
       <!-- Display other book details as needed -->
     </div>
-  </div>
+</div>
