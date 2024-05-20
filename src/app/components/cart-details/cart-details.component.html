@@ -5,7 +5,7 @@
   </div>
 
   <!-- Cart Items -->
-  <ng-container *ngIf="cartItems$ | async as cartItems; else emptyCart">
+  <ng-container *ngIf="cartItems.length > 0; else emptyCart">
     <div *ngFor="let item of cartItems" class="cart-details-container">
       <!-- Book Details -->
       <div class="cart-section">

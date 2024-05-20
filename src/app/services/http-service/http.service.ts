@@ -17,17 +17,46 @@ export class HttpService {
     return this.http.get<any>('https://localhost:7209/api/Book');
   }
 
-  getCartDetails(): Observable<any> {
+  getCartDetails(token?:string): Observable<any> {
+    if(token!=''&& token!=undefined)
+      {
+        return this.http.get<any>('https://localhost:7209/api/Cart/GetCartBooks', { headers:new  HttpHeaders({
+          //'Accept': "application/json",
+          Authorization: `Bearer ${token}` || ""
+        })
+       });
+
+      }
     return this.http.get<any>('https://localhost:7209/api/Cart/GetCartBooks', { headers:this.authHeader });
   }
 
-  addToCart(book: BookObj, quantity: number): Observable<any> {
+  addToCart(book: BookObj, quantity: number,token?:string): Observable<any> {
     const requestBody = { bookId: book.bookId, quantity };
+    if(token!=''&& token!=undefined)
+      {
+        const req={bookId:book,quantity}
+        return this.http.post<any>('https://localhost:7209/api/Cart/AddToCart',req, { headers:new  HttpHeaders({
+          //'Accept': "application/json",
+          Authorization: `Bearer ${token}` || ""
+        })
+       });
+
+      }
     return this.http.post<any>('https://localhost:7209/api/Cart/AddToCart', requestBody, { headers: this.authHeader });
   }
 
-  updateQuantity(book: BookObj, quantity: number): Observable<any> {
+  updateQuantity(book: BookObj, quantity: number,token?:string): Observable<any> {
     const requestBody = { bookId: book.bookId, quantity };
+    if(token!=''&& token!=undefined)
+      {
+        const req={bookId:book,quantity}
+        return this.http.put<any>('https://localhost:7209/api/Cart/UpdateQuantity',req, { headers:new  HttpHeaders({
+          //'Accept': "application/json",
+          Authorization: `Bearer ${token}` || ""
+        })
+       });
+
+      }
     return this.http.put<any>('https://localhost:7209/api/Cart/UpdateQuantity', requestBody, { headers: this.authHeader });
   }
 

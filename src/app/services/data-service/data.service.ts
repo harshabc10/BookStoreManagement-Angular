@@ -20,11 +20,12 @@ export class DataService {
     return this.cartItemsSubject.asObservable();
   }
 
+
   private cartItemCount = new BehaviorSubject<number>(0);
   getCartItemCount(): Observable<number> {
     return this.cartItemCount.asObservable();
   }
-  
+
 
   clearCart() {
     this.cartItems = {};

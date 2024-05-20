@@ -17,16 +17,16 @@ export class BookService {
     return this.httpService.getBooks();
   }
 
-  getAllCartDetails(): Observable<any> {
-    return this.httpService.getCartDetails();
+  getAllCartDetails(token?:string): Observable<any> {
+    return this.httpService.getCartDetails(token);
   }
 
-  addBookToCart(book: BookObj, quantity: number): Observable<any> {
-    return this.httpService.addToCart(book, quantity);
+  addBookToCart(book: BookObj, quantity: number,token?:string): Observable<any> {
+    return this.httpService.addToCart(book, quantity,token);
   }
 
-  updateBookQuantity(book: BookObj, quantity: number): Observable<any> {
-    return this.httpService.updateQuantity(book, quantity);
+  updateBookQuantity(book: BookObj, quantity: number,token?:string): Observable<any> {
+    return this.httpService.updateQuantity(book, quantity,token);
   }
   deleteBookFromCart(bookId: number): Observable<any> {
     return this.httpService.deleteCart(bookId);
