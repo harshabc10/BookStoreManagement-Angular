@@ -11,8 +11,17 @@ export class CustomerDetailsComponent implements OnInit {
 
   customerForm: FormGroup;
   showAddressForm: boolean = false;
+  typeDisplayMap: { [key: string]: string } = {
+    '1': 'Home',
+    '2': 'Work',
+    '3': 'Other'
+  };
+  addressId!: number; // Variable to store the address ID
 
-  constructor(private fb: FormBuilder,private bookService: BookService) {
+  constructor(
+    private fb: FormBuilder,
+    private bookService: BookService // Inject your authentication service
+  ) {
     this.customerForm = this.fb.group({
       fullName: ['', Validators.required],
       mobileNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
@@ -24,34 +33,40 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookService.getAllAddress().subscribe(
-      (response: any) => {
-        if (response && response.data) {
-          console.log('Fetched Address Data:', response.data);
-          this.populateForm(response.data); // Populate form fields with response data
-        } else {
-          console.error('Invalid data received:', response);
+    if (localStorage.getItem('authToken') != null) { // Check if user is authenticated
+      this.bookService.getAllAddress().subscribe(
+        (response: any) => {
+          if (response && response.data && response.data.length > 0) {
+            console.log('Fetched Address Data:', response.data);
+            this.addressId = response.data[0].addressId; // Assuming addressId is available in the response
+            this.populateForm(response.data); // Populate form fields with response data
+          } else {
+            console.error('Invalid or empty data received:', response);
+          }
+        },
+        (error) => {
+          console.error('Error fetching addresses:', error);
         }
-      },
-      (error) => {
-        console.error('Error fetching addresses:', error);
-      }
-    );
+      );
+    } else {
+      console.log('User not authenticated');
+    }
   }
   
   toggleAddressForm(): void {
     this.showAddressForm = !this.showAddressForm;
   }
 
-  populateForm(data: any): void {
-    if (data) {
+  populateForm(data: any[]): void {
+    if (data && data.length > 0) {
+      const firstAddress = data[0]; // Assuming you want to populate the form with the first address in the array
       this.customerForm.patchValue({
-        fullName: data.userFirstName || '', // Provide default value if data is undefined
-        mobileNumber: data.userPhone || '',
-        address: data.address || '',
-        city: data.city || '',
-        state: data.state || '',
-        type: data.type || ''
+        fullName: firstAddress.userFirstName || '', // Provide default value if data is undefined
+        mobileNumber: firstAddress.userPhone || '',
+        address: firstAddress.address || '',
+        city: firstAddress.city || '',
+        state: firstAddress.state || '',
+        type: firstAddress.type || ''
       });
     }
   }
@@ -64,4 +79,45 @@ export class CustomerDetailsComponent implements OnInit {
     }
   }
 
+  getTypeDisplayValue(): string {
+    const typeControl = this.customerForm.get('type');
+    if (typeControl && typeControl.value !== null && this.typeDisplayMap.hasOwnProperty(typeControl.value)) {
+      return this.typeDisplayMap[typeControl.value];
+    }
+    return '';
+  }
+  updateTypeValue(value: string): void {
+    this.customerForm.patchValue({ type: value });
+  }
+
+  editAddress(): void {
+    if (this.addressId) { // Check if addressId is available
+      const authToken = localStorage.getItem('authToken'); // Get auth token from localStorage
+      const updatedAddressData = this.customerForm.value; // Assuming form value matches the address data structure
+      
+      if (authToken !== null) { // Check if authToken is not null
+        this.bookService.editAddress(this.addressId, updatedAddressData, authToken).subscribe(
+          (response) => {
+            console.log('Address updated successfully:', response);
+            // Optionally, perform any actions upon successful update
+          },
+          (error) => {
+            console.error('Error updating address:', error);
+            // Optionally, handle the error or show an error message
+          }
+        );
+      } else {
+        console.log('Auth token is null. Cannot edit address.');
+        // Optionally, show a message to the user indicating that the auth token is null
+      }
+    } else {
+      console.log('Address ID not available. Cannot edit address.');
+      // Optionally, show a message to the user indicating that the address ID is not available
+    }
+  }
+  
+
+  deleteAddress(): void {
+    // Handle delete address functionality
+  }
 }

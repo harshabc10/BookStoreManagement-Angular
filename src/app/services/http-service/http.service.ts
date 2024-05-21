@@ -115,6 +115,18 @@ export class HttpService {
     }
     return this.http.delete<any>(url, { headers: this.authHeader });
   }
+
+  editAddressApiCall(addressId: number, requestBody: any, token?: string): Observable<any> {
+    const url = `https://localhost:7209/api/Address/${addressId}`;
+    if (token !== '' && token !== undefined) {
+      return this.http.put<any>(url, requestBody, { 
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.put<any>(url, requestBody, { headers: this.authHeader });
+  }
   loginApi(email:string,password:string): Observable<any>{
     // https://localhost:7004/api/User/Login?Email=pdshashank8%40gmail.com&password=Shashank%4030
     return this.http.post(`https://localhost:7209/api/User/Login?Email=${encodeURI(email) }&password=${encodeURI(password)}`,{})

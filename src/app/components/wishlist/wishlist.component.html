@@ -16,7 +16,7 @@
         <p class="price">Rs. {{ book.price }} <del>Rs.</del></p>
       </div>
       <button mat-icon-button (click)="book.bookId !== undefined && removeFromWishlist(book.bookId)">
-        <mat-icon>delete</mat-icon>
+        <mat-icon class="delet-icon" svgIcon="delete-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
       </button>
     </div>
     <div *ngIf="wishlistBooks.length === 0" class="no-books">

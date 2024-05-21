@@ -43,4 +43,7 @@ export class BookService {
   deleteFromWishlist(bookId: number, token?: string): Observable<any> {
     return this.httpService.deleteWishlist(bookId, token);
   }
+  editAddress(addressId: number, requestBody: any, token?: string): Observable<any> {
+    return this.httpService.editAddressApiCall(addressId, requestBody, token);
+  }
 }
