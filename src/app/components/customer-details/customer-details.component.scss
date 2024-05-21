@@ -1,133 +1,81 @@
-/* customer-details.component.scss */
-.customer-details-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-  }
-  
-  .customer-details-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .customer-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .customer-info .form-group {
-    flex: 1;
-    margin-right: 10px;
-  }
-  
-  .customer-info .form-group:last-child {
-    margin-right: 0;
-  }
-  
-  .customer-info label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .customer-info input {
-    width: 80%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .add-address-button {
-    padding: 10px 20px;
-    border: 1px solid #d9534f;
-    background-color: #fff;
-    color: #d9534f;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .address-section {
-    margin-bottom: 20px;
-  }
-  
-  .address-type {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .address-type input {
-    margin-right: 10px;
-  }
-  
-  .address-type label {
-    font-weight: bold;
-    margin-right: 20px;
-  }
-  
-  .address-type .edit-link {
-    color: #d9534f;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .address-info {
-    margin-bottom: 10px;
-  }
-  
-  .address-info label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .address-info textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: none;
-  }
-  
-  .address-details {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .address-details .form-group {
-    flex: 1;
-    margin-right: 10px;
-  }
-  
-  .address-details .form-group:last-child {
-    margin-right: 0;
-  }
-  
-  .address-details input {
-    width: 90%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .continue-button {
-    display: block;
-    width: 100%;
-    padding: 10px 20px;
-    border: none;
-    background-color: #337ab7;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
+.customer-details {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  height: 60px;
+  resize: vertical;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #c82333;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}

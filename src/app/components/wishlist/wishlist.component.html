@@ -1,24 +1,26 @@
 <div class="wishlist-container">
-    <div class="breadcrumb">
-      <a href="#" routerLink="/dashboard/books">Home</a> / My Wishlist
-    </div>
-    <div class="wishlist-header">
-      <h2>My Wishlist ({{ wishlistBooks.length }})</h2>
-    </div>
-    <div class="wishlist-books">
-      <div class="book-card" *ngFor="let book of wishlistBooks">
-        <div class="book-image">
-          <img [src]="book.imagePath" alt="{{ book.title }}" />
-        </div>
-        <div class="book-details">
-          <h3>{{ book.title }}</h3>
-          <p>by {{ book.author }}</p>
-          <p class="price">Rs. {{ book.price }} <del>Rs. 699{{ book.originalPrice }}</del></p>
-        </div>
-        <button mat-icon-button (click)="removeFromWishlist(book.bookId)">
-          <mat-icon>delete</mat-icon>
-        </button>
+  <div class="breadcrumb">
+    <a href="#" routerLink="/dashboard/books">Home</a> / My Wishlist
+  </div>
+  <div class="wishlist-header">
+    <h2>My Wishlist ({{ wishlistBooks.length }})</h2>
+  </div>
+  <div class="wishlist-books">
+    <div class="book-card" *ngFor="let book of wishlistBooks">
+      <div class="book-image">
+        <img [src]="book.imagePath" alt="{{ book.title }}" />
       </div>
+      <div class="book-details">
+        <h3>{{ book.title }}</h3>
+        <p>by {{ book.author }}</p>
+        <p class="price">Rs. {{ book.price }} <del>Rs.</del></p>
+      </div>
+      <button mat-icon-button (click)="book.bookId !== undefined && removeFromWishlist(book.bookId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="wishlistBooks.length === 0" class="no-books">
+      No books in the wishlist.
     </div>
   </div>
-  
+</div>

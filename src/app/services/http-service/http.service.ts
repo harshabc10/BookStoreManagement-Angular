@@ -17,6 +17,7 @@ export class HttpService {
     return this.http.get<any>('https://localhost:7209/api/Book');
   }
 
+
   getCartDetails(token?:string): Observable<any> {
     if(token!=''&& token!=undefined)
       {
@@ -28,6 +29,44 @@ export class HttpService {
 
       }
     return this.http.get<any>('https://localhost:7209/api/Cart/GetCartBooks', { headers:this.authHeader });
+  }
+
+  getAddress(token?:string): Observable<any> {
+    if(token!=''&& token!=undefined)
+      {
+        return this.http.get<any>('https://localhost:7209/api/Address', { headers:new  HttpHeaders({
+          //'Accept': "application/json",
+          Authorization: `Bearer ${token}` || ""
+        })
+       });
+
+      }
+    return this.http.get<any>('https://localhost:7209/api/Address', { headers:this.authHeader });
+  }
+
+
+  addToWishlist(book: BookObj, token?: string): Observable<any> {
+    const requestBody = { bookId: book.bookId };
+    if (token !== '' && token !== undefined) {
+      const req = { bookId: book };
+      return this.http.post<any>('https://localhost:7209/api/Wishlist/AddToWishlist', req, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.post<any>('https://localhost:7209/api/Wishlist/AddToWishlist', requestBody, { headers: this.authHeader });
+  }
+  
+  getAllWishlist(token?: string): Observable<any> {
+    if (token !== '' && token !== undefined) {
+      return this.http.get<any>('https://localhost:7209/api/Wishlist/GetWishlistBooks', {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.get<any>('https://localhost:7209/api/Wishlist/GetWishlistBooks', { headers: this.authHeader });
   }
 
   addToCart(book: BookObj, quantity: number,token?:string): Observable<any> {
@@ -65,6 +104,17 @@ export class HttpService {
     return this.http.delete<any>(url, { headers: this.authHeader });
   }
 
+  deleteWishlist(bookId: number, token?: string): Observable<any> {
+    const url = `https://localhost:7209/api/Wishlist/DeleteWishlist/${bookId}`;
+    if (token !== '' && token !== undefined) {
+      return this.http.delete<any>(url, { 
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.delete<any>(url, { headers: this.authHeader });
+  }
   loginApi(email:string,password:string): Observable<any>{
     // https://localhost:7004/api/User/Login?Email=pdshashank8%40gmail.com&password=Shashank%4030
     return this.http.post(`https://localhost:7209/api/User/Login?Email=${encodeURI(email) }&password=${encodeURI(password)}`,{})

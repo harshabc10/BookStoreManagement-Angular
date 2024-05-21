@@ -98,21 +98,32 @@ export class DataService {
     this.searchString.next(state);
   }
 
-  //////wishlist//////////
-  private wishlistBooks: any[] = [];
+ //////wishlist//////////
+ private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
+  currWishlistBook = this.wishlistBooks.asObservable();
 
-  getWishlistBooks(): Observable<any[]> {
-    return of(this.wishlistBooks);
+  updateWishlistBooks(book: BookObj) {
+    const currentWishlist = this.wishlistBooks.getValue();
+    this.wishlistBooks.next([...currentWishlist, book]);
   }
 
-  addToWishlist(book: any) {
-    this.wishlistBooks.push(book);
-  }
+  
 
-  removeFromWishlist(bookId: number): Observable<void> {
-    this.wishlistBooks = this.wishlistBooks.filter(book => book.bookId !== bookId);
-    return of();
-  }
+// private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
+// currWishlistBook = this.wishlistBooks.asObservable();
+
+// updateWishlistBooks(books: BookObj[]) {
+//   this.wishlistBooks.next(books);
+// }
+
+  // addToWishlist(book: any) {
+  //   this.wishlistBooks.push(book);
+  // }
+
+  // removeFromWishlist(bookId: number): Observable<void> {
+  //   this.wishlistBooks = this.wishlistBooks.filter(book => book.bookId !== bookId);
+  //   return of();
+  // }
 
   constructor() {}
 }

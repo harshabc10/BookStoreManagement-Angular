@@ -63,40 +63,36 @@ export class CartDetailsComponent implements OnInit {
       });
     }
   }
-
   increaseCount(book: BookObj) {
     if (book && book.quantity !== undefined) {
-      book.quantity++;
+      book.quantity++; // Update local quantity
       if (localStorage.getItem('authToken') != null) {
-        // Auth token is present, update quantity via service
-        this.bookService.updateBookQuantity(book, 1).subscribe(() => {
-          // Quantity updated successfully, perform any additional actions if needed
+        // Auth token is present, update quantity on the server
+        this.dataService.updateCartItemQuantity(book, this.count);
+        this.bookService.updateBookQuantity(book, book.quantity).subscribe(() => {
+          // Update UI or perform any other actions after successful update on server
         }, error => {
-          console.error('Error updating quantity:', error);
+          console.error('Error updating quantity on server:', error);
         });
-      } else {
-        // Auth token not present, update quantity in DataService only
-        this.dataService.addToCart(book, 1); // Increase quantity by 1
       }
     }
   }
   
   decreaseCount(book: BookObj) {
     if (book && book.quantity !== undefined && book.quantity > 1) {
-      book.quantity--;
+      book.quantity--; // Update local quantity
       if (localStorage.getItem('authToken') != null) {
-        // Auth token is present, update quantity via service
-        this.bookService.updateBookQuantity(book, -1).subscribe(() => {
-          // Quantity updated successfully, perform any additional actions if needed
+        // Auth token is present, update quantity on the server
+        this.dataService.updateCartItemQuantity(book, this.count);
+        this.bookService.updateBookQuantity(book, book.quantity).subscribe(() => {
+          // Update UI or perform any other actions after successful update on server
         }, error => {
-          console.error('Error updating quantity:', error);
+          console.error('Error updating quantity on server:', error);
         });
-      } else {
-        // Auth token not present, update quantity in DataService only
-        this.dataService.addToCart(book, -1); // Decrease quantity by 1
       }
     }
   }
+  
 
   handlePlaceOrder(data: any, choice?: string) {
     if (localStorage.getItem('authToken') != null) {

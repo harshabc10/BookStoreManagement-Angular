@@ -51,4 +51,7 @@ export class BooksHeaderComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/dashboard/books']);
   }
+  wishlist(){
+    this.router.navigate(['/dashboard/wishlist']);
+  }
 }

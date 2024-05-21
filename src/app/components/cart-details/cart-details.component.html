@@ -51,18 +51,15 @@
     <!-- Address Details -->
     <div class="cart-section" (click)="toggleAddressDetails()">
       <h3>Address Details</h3>
-      <div class="address-details" *ngIf="showAddressDetails">
-        <p>Name: John Doe</p>
-        <p>Address: 123 Street, City</p>
-        <p>Phone: +1234567890</p>
-        <p>Email: johndoe@gmail.com</p>
+      <div class="address-details" *ngIf="showAddressDetails" (click)="$event.stopPropagation()">
+        <app-customer-details></app-customer-details>
       </div>
     </div>
 
     <!-- Order Summary -->
     <div class="cart-section" (click)="toggleOrderSummary()">
       <h3>Order Summary</h3>
-      <div class="order-summary" *ngIf="showOrderSummary">
+      <div class="order-summary" *ngIf="showOrderSummary" (click)="$event.stopPropagation()">
         <p>Subtotal: Rs. </p>
         <p>Shipping: Rs. 50.00</p>
         <p>Total: Rs. </p>

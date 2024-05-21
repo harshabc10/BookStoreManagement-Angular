@@ -31,6 +31,16 @@ export class BookService {
   deleteBookFromCart(bookId: number): Observable<any> {
     return this.httpService.deleteCart(bookId);
   }
-  
-  
+  addAllToWishlist(book: BookObj, token?: string): Observable<any>{
+    return this.httpService.addToWishlist(book,token)
+  }
+  getAllBooksWishlist(token?: string): Observable<any>{
+    return this.httpService.getAllWishlist(token)
+  }
+  getAllAddress(token?: string): Observable<any>{
+    return this.httpService.getAddress(token)
+  }
+  deleteFromWishlist(bookId: number, token?: string): Observable<any> {
+    return this.httpService.deleteWishlist(bookId, token);
+  }
 }
