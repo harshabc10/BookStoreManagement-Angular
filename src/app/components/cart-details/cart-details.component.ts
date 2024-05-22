@@ -19,6 +19,7 @@ export class CartDetailsComponent implements OnInit {
   showOrderSummary: boolean = false;
   cartItems: (BookObj & { quantity: number })[] = [];
   count: number = 1;
+  authToken: string | null = null;
 
   constructor(private dataService: DataService, private bookService: BookService,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
@@ -28,17 +29,22 @@ export class CartDetailsComponent implements OnInit {
   }
 
   toggleAddressDetails() {
-    this.showAddressDetails = !this.showAddressDetails;
+    if (this.authToken) { // Check if authToken is present
+      this.showAddressDetails = !this.showAddressDetails;
+    }
   }
-
+  
   toggleOrderSummary() {
-    this.showOrderSummary = !this.showOrderSummary;
+    if (this.authToken) { // Check if authToken is present
+      this.showOrderSummary = !this.showOrderSummary;
+    }
   }
+  
 
   ngOnInit(): void {
-    const authToken = localStorage.getItem('authToken');
-  
-    if (authToken) {
+    this.authToken = localStorage.getItem('authToken'); // Set authToken from localStorage
+    
+    if (this.authToken) {
       // Auth token is present, fetch all cart details
       this.bookService.getAllCartDetails().subscribe((response) => {
         this.cartItems = response.data;
@@ -51,6 +57,10 @@ export class CartDetailsComponent implements OnInit {
     }
   }
   
+
+  handleCheckout(){
+
+  }
 
   removeFromCart(book: BookObj) {
     this.cartItems = this.cartItems.filter(item => item.bookId !== book.bookId);

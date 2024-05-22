@@ -34,7 +34,7 @@
                 <button (click)="removeFromCart(item)">Remove</button>
               </div>
             </div>
-            <button class="place-order-button" (click)="handlePlaceOrder(item)">Place Order</button>
+            <button *ngIf="!authToken" class="place-order-button" (click)="handlePlaceOrder(item)">Place Order</button>
           </div>
         </div>
       </div>
@@ -60,9 +60,17 @@
     <div class="cart-section" (click)="toggleOrderSummary()">
       <h3>Order Summary</h3>
       <div class="order-summary" *ngIf="showOrderSummary" (click)="$event.stopPropagation()">
-        <p>Subtotal: Rs. </p>
-        <p>Shipping: Rs. 50.00</p>
-        <p>Total: Rs. </p>
+        <div *ngFor="let item of cartItems">
+          <div class="book-item">
+            <img [src]="item.imagePath" alt="Book Cover" />
+            <div class="book-info">
+              <h4>Title: {{ item.title }}</h4>
+              <p>Author: {{ item.author }}</p>
+              <p>Price: Rs. {{ item.price }}</p>
+            </div>
+          </div>
+        </div>
+        <button class="checkout-button" (click)="handleCheckout()">Checkout</button>
       </div>
     </div>
   </div>
