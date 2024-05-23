@@ -42,19 +42,19 @@
   <span *ngIf="!showAddressForm" class="input-value">{{ getTypeDisplayValue() }}</span>
   <div class="radio-group" *ngIf="showAddressForm">
     <label>
-      <input type="radio" formControlName="type" value="1" (click)="updateTypeValue('1')" /> Home
+      <input type="radio" formControlName="type" value="0" (click)="updateTypeValue('0')" /> Home
     </label>
     <label>
-      <input type="radio" formControlName="type" value="2" (click)="updateTypeValue('2')" /> Work
+      <input type="radio" formControlName="type" value="1" (click)="updateTypeValue('1')" /> Work
     </label>
     <label>
-      <input type="radio" formControlName="type" value="3" (click)="updateTypeValue('3')" /> Other
+      <input type="radio" formControlName="type" value="2" (click)="updateTypeValue('2')" /> Other
     </label>
   </div>
 </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary continue-btn">Continue</button>
+      <button type="submit" class="btn btn-primary continue-btn" (click)="home()">Continue</button>
     </div>
   </form>
 </div>

@@ -117,6 +117,7 @@ export class HttpService {
   }
 
   editAddressApiCall(addressId: number, requestBody: any, token?: string): Observable<any> {
+    requestBody.type=Number(requestBody.type);
     const url = `https://localhost:7209/api/Address/${addressId}`;
     if (token !== '' && token !== undefined) {
       return this.http.put<any>(url, requestBody, { 
@@ -127,6 +128,32 @@ export class HttpService {
     }
     return this.http.put<any>(url, requestBody, { headers: this.authHeader });
   }
+
+  addOrderApiCall(order: any, token?: string): Observable<any> {
+    const url = 'https://localhost:7209/api/Order';
+    if (token !== '' && token !== undefined) {
+      return this.http.post<any>(url, order, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.post<any>(url, order, { headers: this.authHeader });
+  }
+
+  // Method to get all orders
+  getAllOrdersApiCall(token?: string): Observable<any> {
+    const url = 'https://localhost:7209/api/Order';
+    if (token !== '' && token !== undefined) {
+      return this.http.get<any>(url, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.get<any>(url, { headers: this.authHeader });
+  }
+
   loginApi(email:string,password:string): Observable<any>{
     // https://localhost:7004/api/User/Login?Email=pdshashank8%40gmail.com&password=Shashank%4030
     return this.http.post(`https://localhost:7209/api/User/Login?Email=${encodeURI(email) }&password=${encodeURI(password)}`,{})

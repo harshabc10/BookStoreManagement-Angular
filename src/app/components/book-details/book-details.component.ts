@@ -21,14 +21,22 @@
     ngOnInit(): void {
       this.dataService.currentBookList.subscribe(res1 => {
         this.route.params.subscribe(res2 => {
-          this.selectedBook = res1.filter(e => e.bookId == res2['bookId'])[0];
-          const cartItem = this.dataService.getCartItems().subscribe(cartItems => {
-            const item = cartItems.find(item => item.bookId === this.selectedBook.bookId);
-            if (item) {
-              this.addedToBag = true;
-              this.count = item.quantity;
-            }
-          });
+          const foundBook = res1.find(e => e.bookId == res2['bookId']);
+          if (foundBook) {
+            this.selectedBook = foundBook;
+            this.checkIfBookInWishlist();
+            this.dataService.getCartItems().subscribe(cartItems => {
+              const item = cartItems.find(item => item.bookId === this.selectedBook.bookId);
+              if (item) {
+                this.addedToBag = true;
+                this.count = item.quantity;
+              }
+            });
+          } else {
+            // Handle the case where the book is not found
+            console.error('Book not found');
+            this.router.navigate(['/error-page']); // or any appropriate action
+          }
         });
       });
 
@@ -91,6 +99,24 @@
           this.dataService.updateWishlistBooks(this.selectedBook);
         
       }
+  }
+
+  checkIfBookInWishlist() {
+    if (localStorage.getItem('authToken')) {
+      this.bookService.getAllBooksWishlist().subscribe((wishlistBooks) => {
+        const bookInWishlist = wishlistBooks.data.some((book:any) => book.bookId === this.selectedBook.bookId);
+        if (bookInWishlist) {
+          this.addedToWishlist = true;
+        }
+      });
+    } else {
+      this.dataService.currWishlistBook.subscribe((wishlist) => {
+        const bookInWishlist = wishlist.some(book => book.bookId === this.selectedBook.bookId);
+        if (bookInWishlist) {
+          this.addedToWishlist = true;
+        }
+      });
+    }
   }
 
     

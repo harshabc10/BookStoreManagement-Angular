@@ -34,12 +34,15 @@
                 <button (click)="removeFromCart(item)">Remove</button>
               </div>
             </div>
-            <button *ngIf="!authToken" class="place-order-button" (click)="handlePlaceOrder(item)">Place Order</button>
           </div>
         </div>
       </div>
+      <button *ngIf="!authToken" class="place-order-button" (click)="handlePlaceOrder()">Place Order</button>
+
     </div>
+
   </ng-container>
+
 
   <!-- Empty Cart Message -->
   <ng-template #emptyCart>
@@ -48,13 +51,13 @@
 
   <!-- Address Details & Order Summary -->
   <div class="cart-details-container">
-    <!-- Address Details -->
     <div class="cart-section" (click)="toggleAddressDetails()">
       <h3>Address Details</h3>
       <div class="address-details" *ngIf="showAddressDetails" (click)="$event.stopPropagation()">
-        <app-customer-details></app-customer-details>
+        <app-customer-details (addressSelected)="onAddressSelected($event)"></app-customer-details>
       </div>
     </div>
+    
 
     <!-- Order Summary -->
     <div class="cart-section" (click)="toggleOrderSummary()">

@@ -20,6 +20,13 @@ export class CartDetailsComponent implements OnInit {
   cartItems: (BookObj & { quantity: number })[] = [];
   count: number = 1;
   authToken: string | null = null;
+  orderId!:number
+
+  selectedAddressId: number | null = null;
+
+  onAddressSelected($event: number) {
+    this.selectedAddressId = $event;
+  }
 
   constructor(private dataService: DataService, private bookService: BookService,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
@@ -58,9 +65,41 @@ export class CartDetailsComponent implements OnInit {
   }
   
 
-  handleCheckout(){
+  handleCheckout() {
+    if (this.authToken) {
+      const bookIds = this.cartItems.map(item => item.bookId);
+      const addressId = this.selectedAddressId;
+      // this.orderId=
+  
+      // Check if addressId is valid (not null or undefined, and a valid integer)
+      if (addressId != null && !isNaN(addressId)) {
+        const order = {
+          // orderId:this.orderId,
+            addressId: addressId,
+            bookIds: bookIds
+        };
+  
+        this.bookService.addOrder(order, this.authToken).subscribe(response => {
+          // this.orderId=response.data[0]
+          console.log('Order placed successfully:', response);
+         for(let i=0;i<bookIds.length;i++){
+          this.bookService.deleteBookFromCart(bookIds[i]||0).subscribe(res=>console.log(res)
+          )
+         }
+          this.router.navigate(['/dashboard/orders']);
 
+
+        }, error => {
+          console.error('Error placing order:', error);
+        });
+      } else {
+        console.error('Invalid addressId:', addressId);
+      }
+    } else {
+      // Handle authentication/token issues
+    }
   }
+  
 
   removeFromCart(book: BookObj) {
     this.cartItems = this.cartItems.filter(item => item.bookId !== book.bookId);
@@ -104,7 +143,7 @@ export class CartDetailsComponent implements OnInit {
   }
   
 
-  handlePlaceOrder(data: any, choice?: string) {
+  handlePlaceOrder() {
     if (localStorage.getItem('authToken') != null) {
       // Logic for handling order placement when token is present
       

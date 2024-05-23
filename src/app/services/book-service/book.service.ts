@@ -46,4 +46,12 @@ export class BookService {
   editAddress(addressId: number, requestBody: any, token?: string): Observable<any> {
     return this.httpService.editAddressApiCall(addressId, requestBody, token);
   }
+  addOrder(order: any, token?: string): Observable<any> {
+    return this.httpService.addOrderApiCall(order, token);
+  }
+
+  // Method to get all orders
+  getAllOrders(token?: string): Observable<any> {
+    return this.httpService.getAllOrdersApiCall(token);
+  }
 }

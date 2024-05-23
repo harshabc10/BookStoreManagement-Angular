@@ -107,7 +107,16 @@ export class DataService {
     this.wishlistBooks.next([...currentWishlist, book]);
   }
 
+
   
+
+  private address = new BehaviorSubject<number>(0);
+  currAddressId = this.address.asObservable();
+
+  updateAddressId(addressId: number) {
+    // const currentWishlist = this.wishlistBooks.getValue();
+    this.address.next(addressId);
+  }
 
 // private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
 // currWishlistBook = this.wishlistBooks.asObservable();

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BookService } from 'src/app/services/book-service/book.service';
+import { DataService } from 'src/app/services/data-service/data.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -18,9 +20,13 @@ export class CustomerDetailsComponent implements OnInit {
   };
   addressId!: number; // Variable to store the address ID
 
+  @Output() addressSelected = new EventEmitter<number>();
+
   constructor(
     private fb: FormBuilder,
-    private bookService: BookService // Inject your authentication service
+    private bookService: BookService,
+    private dataService:DataService ,
+    private router:Router// Inject your authentication service
   ) {
     this.customerForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -40,6 +46,8 @@ export class CustomerDetailsComponent implements OnInit {
             console.log('Fetched Address Data:', response.data);
             this.addressId = response.data[0].addressId; // Assuming addressId is available in the response
             this.populateForm(response.data); // Populate form fields with response data
+            this.emitAddressId(this.addressId); // Emit the addressId obtained
+          // this.dataService.updateAddressId(this.addressId)
           } else {
             console.error('Invalid or empty data received:', response);
           }
@@ -86,8 +94,12 @@ export class CustomerDetailsComponent implements OnInit {
     }
     return '';
   }
+
   updateTypeValue(value: string): void {
     this.customerForm.patchValue({ type: value });
+  }
+  home(){
+    this.router.navigate(['/dashboard/books'])
   }
 
   editAddress(): void {
@@ -115,9 +127,12 @@ export class CustomerDetailsComponent implements OnInit {
       // Optionally, show a message to the user indicating that the address ID is not available
     }
   }
-  
 
   deleteAddress(): void {
     // Handle delete address functionality
+  }
+
+  emitAddressId(addressId: number): void {
+    this.addressSelected.emit(addressId);
   }
 }
