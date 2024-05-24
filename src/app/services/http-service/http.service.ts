@@ -44,6 +44,18 @@ export class HttpService {
     return this.http.get<any>('https://localhost:7209/api/Address', { headers:this.authHeader });
   }
 
+  addAddress(requestBody: any, token?: string): Observable<any> {
+    requestBody.type=Number(requestBody.type)
+    if (token !== '' && token !== undefined) {
+      return this.http.post<any>('https://localhost:7209/api/Address', requestBody, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}` || ""
+        })
+      });
+    }
+    return this.http.post<any>('https://localhost:7209/api/Address', requestBody, { headers: this.authHeader });
+  }
+
 
   addToWishlist(book: BookObj, token?: string): Observable<any> {
     const requestBody = { bookId: book.bookId };
@@ -115,6 +127,15 @@ export class HttpService {
     }
     return this.http.delete<any>(url, { headers: this.authHeader });
   }
+
+  deleteAddressApiCall(addressId: number, token?: string): Observable<any> {
+    const url = `https://localhost:7209/api/Address/${addressId}`;
+    const headers = new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : ''
+    });
+    return this.http.delete<any>(url, { headers });
+  }
+  
 
   editAddressApiCall(addressId: number, requestBody: any, token?: string): Observable<any> {
     requestBody.type=Number(requestBody.type);

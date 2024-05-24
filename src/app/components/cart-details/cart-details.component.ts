@@ -21,6 +21,7 @@ export class CartDetailsComponent implements OnInit {
   count: number = 1;
   authToken: string | null = null;
   orderId!:number
+  
 
   selectedAddressId: number | null = null;
 
