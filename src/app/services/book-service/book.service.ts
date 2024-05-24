@@ -31,6 +31,32 @@ export class BookService {
   deleteBookFromCart(bookId: number): Observable<any> {
     return this.httpService.deleteCart(bookId);
   }
-  
-  
+  addAllToWishlist(book: BookObj, token?: string): Observable<any>{
+    return this.httpService.addToWishlist(book,token)
+  }
+  getAllBooksWishlist(token?: string): Observable<any>{
+    return this.httpService.getAllWishlist(token)
+  }
+  getAllAddress(token?: string): Observable<any>{
+    return this.httpService.getAddress(token)
+  }
+  deleteFromWishlist(bookId: number, token?: string): Observable<any> {
+    return this.httpService.deleteWishlist(bookId, token);
+  }
+  editAddress(addressId: number, requestBody: any, token?: string): Observable<any> {
+    return this.httpService.editAddressApiCall(addressId, requestBody, token);
+  }
+  addOrder(order: any, token?: string): Observable<any> {
+    return this.httpService.addOrderApiCall(order, token);
+  }
+  addAddressService(requestBody: any, token?: string): Observable<any> {
+    return this.httpService.addAddress(requestBody, token);
+  }
+  deleteAddress(addressId: number,token?: string):Observable<any> {
+    return this.httpService.deleteAddressApiCall(addressId,token);
+  }
+  // Method to get all orders
+  getAllOrders(token?: string): Observable<any> {
+    return this.httpService.getAllOrdersApiCall(token);
+  }
 }

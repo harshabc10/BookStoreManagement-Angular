@@ -9,6 +9,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginSignupComponent } from './components/login-signup/login-signup.component';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -52,7 +53,11 @@ const routes: Routes = [
     path:'wishlist',
     component:WishlistComponent
 
-  },]
+  },
+{
+  path:'orders',
+  component:OrderDetailsComponent
+}]
     },
     {
       path:"rrr",

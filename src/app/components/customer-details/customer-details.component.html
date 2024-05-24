@@ -1,52 +1,67 @@
-<!-- customer-details.component.html -->
-<div class="customer-details-container">
-    <h2>Customer Details</h2>
-    <button class="add-address-button">Add New Address</button>
-    <div class="customer-info">
+<div class="customer-details">
+  <div class="header">
+    <button class="btn btn-secondary add-address-btn" (click)="toggleAddressForm()">Add New Address</button>
+  </div>
+  
+  <div *ngFor="let add of addresses" class="first-display" >
+    {{add.UserName}}
+    {{add.UserPhone}}
+    {{add.Address}}
+
+    <button (click)="editAddress(add)">edit</button><button (click)="deleteAddress(add)">delete</button><button (click)="onContinue(add)">continue</button>
+  </div>
+
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()"  *ngIf="showAddressForm">
+    <div class="form-row">
       <div class="form-group">
         <label for="fullName">Full Name</label>
-        <input id="fullName" type="text" value="Poonam Yadav" />
+        <span *ngIf="!showAddressForm" class="input-value">{{ customerForm.get('userName')?.value }}</span>
+        <input id="fullName" formControlName="userName" type="text" *ngIf="showAddressForm" />
       </div>
       <div class="form-group">
         <label for="mobileNumber">Mobile Number</label>
-        <input id="mobileNumber" type="text" value="8167895478" />
-      </div>
-      
-    </div>
-  
-    <div class="address-section">
-      <div class="address-type">
-        <input type="radio" id="work" name="addressType" checked />
-        <label for="work">1. WORK</label>
-        <a href="#" class="edit-link">Edit</a>
-      </div>
-      <div class="address-info">
-        <label>Address</label>
-        <textarea readonly>BridgeLabz Solutions LLP, No. 42, 14th Main, 15th Cross, Sector 4, Opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore</textarea>
-      </div>
-      <div class="address-details">
-        <div class="form-group">
-          <label for="city">City/Town</label>
-          <input id="city" type="text" value="Bengaluru" readonly />
-        </div>
-        <div class="form-group">
-          <label for="state">State</label>
-          <input id="state" type="text" value="Karnataka" readonly />
-        </div>
+        <span *ngIf="!showAddressForm" class="input-value">{{ customerForm.get('userPhone')?.value }}</span>
+        <input id="mobileNumber" formControlName="userPhone" type="text" *ngIf="showAddressForm" />
       </div>
     </div>
-  
-    <div class="address-section">
-      <div class="address-type">
-        <input type="radio" id="home" name="addressType" />
-        <label for="home">2. HOME</label>
+    <!-- Edit and Delete buttons -->
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <span *ngIf="!showAddressForm" class="input-value">{{ customerForm.get('address')?.value }}</span>
+      <textarea id="address" formControlName="address" *ngIf="showAddressForm"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="city">City/Town</label>
+        <span *ngIf="!showAddressForm" class="input-value">{{ customerForm.get('city')?.value }}</span>
+        <input id="city" formControlName="city" type="text" *ngIf="showAddressForm" />
       </div>
-      <div class="address-info">
-        <label>Address</label>
-        <textarea readonly>BridgeLabz Solutions LLP, No. 42, 14th Main, 15th Cross, Sector 4, Opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore</textarea>
+      <div class="form-group">
+        <label for="state">State</label>
+        <span *ngIf="!showAddressForm" class="input-value">{{ customerForm.get('state')?.value }}</span>
+        <input id="state" formControlName="state" type="text" *ngIf="showAddressForm" />
       </div>
     </div>
-  
-    <button class="continue-button">CONTINUE</button>
+    <div class="form-group">
+  <label>Type</label>
+  <span *ngIf="!showAddressForm" class="input-value">{{ getTypeDisplayValue() }}</span>
+  <div class="radio-group" *ngIf="showAddressForm">
+    <label>
+      <input type="radio" formControlName="type" value="1" (click)="updateTypeValue('1')" /> Home
+    </label>
+    <label>
+      <input type="radio" formControlName="type" value="2" (click)="updateTypeValue('2')" /> Work
+    </label>
+    <label>
+      <input type="radio" formControlName="type" value="3" (click)="updateTypeValue('3')" /> Other
+    </label>
   </div>
-  
+</div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary continue-btn" (click)="onContinueb()">Continue</button>
+    </div>
+  </form>
+</div>

@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 export class BooksHeaderComponent implements OnInit {
   loginclick: boolean = false;
   searchString: string = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -26,19 +27,27 @@ export class BooksHeaderComponent implements OnInit {
     private httpService: HttpService,
     private router: Router
   ) {
-    matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON)),
-    matIconRegistry.addSvgIconLiteral("profile-icon", domSanitizer.bypassSecurityTrustHtml(PROFILE_ICON)),
-    matIconRegistry.addSvgIconLiteral("cart-icon", domSanitizer.bypassSecurityTrustHtml(CART_ICON))
+    matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON));
+    matIconRegistry.addSvgIconLiteral("profile-icon", domSanitizer.bypassSecurityTrustHtml(PROFILE_ICON));
+    matIconRegistry.addSvgIconLiteral("cart-icon", domSanitizer.bypassSecurityTrustHtml(CART_ICON));
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.checkLoginStatus();
     this.httpService.getBooks().subscribe(res => this.dataService.changeState(res.data));
+  }
+
+  checkLoginStatus(): boolean {
+    return !!localStorage.getItem('authToken');
   }
 
   login() {
     const dialogRef = this.dialog.open(LoginSignupComponent, { width: '720px', height: '480px' });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (result === true) { // Assuming result indicates successful login
+        this.isLoggedIn = true;
+      }
     });
     this.loginclick = !this.loginclick;
   }
@@ -49,6 +58,19 @@ export class BooksHeaderComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
+    this.isLoggedIn = false;
     this.router.navigate(['/dashboard/books']);
+  }
+
+  wishlist() {
+    this.router.navigate(['/dashboard/wishlist']);
+  }
+
+  order() {
+    if (this.isLoggedIn) {
+      this.router.navigate(['/dashboard/orders']);
+    } else {
+      this.login();
+    }
   }
 }

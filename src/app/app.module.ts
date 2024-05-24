@@ -21,7 +21,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { SearchPipe } from './services/pipe/search.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
-import { WishlistComponent } from './components/wishlist/wishlist.component'; // Import these modules
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component'; // Import these modules
 
 
 
@@ -40,7 +41,8 @@ import { WishlistComponent } from './components/wishlist/wishlist.component'; //
     LoginSignupComponent,
     SearchPipe,
     CustomerDetailsComponent,
-    WishlistComponent
+    WishlistComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

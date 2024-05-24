@@ -17,7 +17,11 @@
                     <span class="symbol" (click)="increaseCount()">+</span>
                   </div>
                 
-                <button mat-flat-button class="wishlist-button" (click)="addToWishlist()"> WISHLIST</button>
+                  <div *ngIf="selectedBook" class="book-details-cnt">
+                    <!-- Other HTML code -->
+                    <button mat-flat-button class="wishlist-button" (click)="addToWishlist()" *ngIf="!addedToWishlist">WISHLIST</button>
+                    <span *ngIf="addedToWishlist" class="already-in-wishlist">Item already in wishlist</span>
+                </div>
             </div>
         </div>
 

@@ -19,6 +19,15 @@ export class CartDetailsComponent implements OnInit {
   showOrderSummary: boolean = false;
   cartItems: (BookObj & { quantity: number })[] = [];
   count: number = 1;
+  authToken: string | null = null;
+  orderId!:number
+  
+
+  selectedAddressId: number | null = null;
+
+  onAddressSelected($event: number) {
+    this.selectedAddressId = $event;
+  }
 
   constructor(private dataService: DataService, private bookService: BookService,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,
@@ -28,17 +37,22 @@ export class CartDetailsComponent implements OnInit {
   }
 
   toggleAddressDetails() {
-    this.showAddressDetails = !this.showAddressDetails;
+    if (this.authToken) { // Check if authToken is present
+      this.showAddressDetails = !this.showAddressDetails;
+    }
   }
-
+  
   toggleOrderSummary() {
-    this.showOrderSummary = !this.showOrderSummary;
+    if (this.authToken) { // Check if authToken is present
+      this.showOrderSummary = !this.showOrderSummary;
+    }
   }
+  
 
   ngOnInit(): void {
-    const authToken = localStorage.getItem('authToken');
-  
-    if (authToken) {
+    this.authToken = localStorage.getItem('authToken'); // Set authToken from localStorage
+    
+    if (this.authToken) {
       // Auth token is present, fetch all cart details
       this.bookService.getAllCartDetails().subscribe((response) => {
         this.cartItems = response.data;
@@ -48,6 +62,42 @@ export class CartDetailsComponent implements OnInit {
       this.dataService.getCartItems().subscribe((cartItems) => {
         this.cartItems = cartItems;
       });
+    }
+  }
+  
+
+  handleCheckout() {
+    if (this.authToken) {
+      const bookIds = this.cartItems.map(item => item.bookId);
+      const addressId = this.selectedAddressId;
+      // this.orderId=
+  
+      // Check if addressId is valid (not null or undefined, and a valid integer)
+      if (addressId != null && !isNaN(addressId)) {
+        const order = {
+          // orderId:this.orderId,
+            addressId: addressId,
+            bookIds: bookIds
+        };
+  
+        this.bookService.addOrder(order, this.authToken).subscribe(response => {
+          // this.orderId=response.data[0]
+          console.log('Order placed successfully:', response);
+         for(let i=0;i<bookIds.length;i++){
+          this.bookService.deleteBookFromCart(bookIds[i]||0).subscribe(res=>console.log(res)
+          )
+         }
+          this.router.navigate(['/dashboard/orders']);
+
+
+        }, error => {
+          console.error('Error placing order:', error);
+        });
+      } else {
+        console.error('Invalid addressId:', addressId);
+      }
+    } else {
+      // Handle authentication/token issues
     }
   }
   
@@ -63,42 +113,38 @@ export class CartDetailsComponent implements OnInit {
       });
     }
   }
-
   increaseCount(book: BookObj) {
     if (book && book.quantity !== undefined) {
-      book.quantity++;
+      book.quantity++; // Update local quantity
       if (localStorage.getItem('authToken') != null) {
-        // Auth token is present, update quantity via service
-        this.bookService.updateBookQuantity(book, 1).subscribe(() => {
-          // Quantity updated successfully, perform any additional actions if needed
+        // Auth token is present, update quantity on the server
+        this.dataService.updateCartItemQuantity(book, this.count);
+        this.bookService.updateBookQuantity(book, book.quantity).subscribe(() => {
+          // Update UI or perform any other actions after successful update on server
         }, error => {
-          console.error('Error updating quantity:', error);
+          console.error('Error updating quantity on server:', error);
         });
-      } else {
-        // Auth token not present, update quantity in DataService only
-        this.dataService.addToCart(book, 1); // Increase quantity by 1
       }
     }
   }
   
   decreaseCount(book: BookObj) {
     if (book && book.quantity !== undefined && book.quantity > 1) {
-      book.quantity--;
+      book.quantity--; // Update local quantity
       if (localStorage.getItem('authToken') != null) {
-        // Auth token is present, update quantity via service
-        this.bookService.updateBookQuantity(book, -1).subscribe(() => {
-          // Quantity updated successfully, perform any additional actions if needed
+        // Auth token is present, update quantity on the server
+        this.dataService.updateCartItemQuantity(book, this.count);
+        this.bookService.updateBookQuantity(book, book.quantity).subscribe(() => {
+          // Update UI or perform any other actions after successful update on server
         }, error => {
-          console.error('Error updating quantity:', error);
+          console.error('Error updating quantity on server:', error);
         });
-      } else {
-        // Auth token not present, update quantity in DataService only
-        this.dataService.addToCart(book, -1); // Decrease quantity by 1
       }
     }
   }
+  
 
-  handlePlaceOrder(data: any, choice?: string) {
+  handlePlaceOrder() {
     if (localStorage.getItem('authToken') != null) {
       // Logic for handling order placement when token is present
       

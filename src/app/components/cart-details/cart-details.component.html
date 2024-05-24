@@ -34,12 +34,15 @@
                 <button (click)="removeFromCart(item)">Remove</button>
               </div>
             </div>
-            <button class="place-order-button" (click)="handlePlaceOrder(item)">Place Order</button>
           </div>
         </div>
       </div>
+      <button *ngIf="!authToken" class="place-order-button" (click)="handlePlaceOrder()">Place Order</button>
+
     </div>
+
   </ng-container>
+
 
   <!-- Empty Cart Message -->
   <ng-template #emptyCart>
@@ -48,24 +51,29 @@
 
   <!-- Address Details & Order Summary -->
   <div class="cart-details-container">
-    <!-- Address Details -->
     <div class="cart-section" (click)="toggleAddressDetails()">
       <h3>Address Details</h3>
-      <div class="address-details" *ngIf="showAddressDetails">
-        <p>Name: John Doe</p>
-        <p>Address: 123 Street, City</p>
-        <p>Phone: +1234567890</p>
-        <p>Email: johndoe@gmail.com</p>
+      <div class="address-details" *ngIf="showAddressDetails" (click)="$event.stopPropagation()">
+        <app-customer-details (addressSelected)="onAddressSelected($event)"></app-customer-details>
       </div>
     </div>
+    
 
     <!-- Order Summary -->
     <div class="cart-section" (click)="toggleOrderSummary()">
       <h3>Order Summary</h3>
-      <div class="order-summary" *ngIf="showOrderSummary">
-        <p>Subtotal: Rs. </p>
-        <p>Shipping: Rs. 50.00</p>
-        <p>Total: Rs. </p>
+      <div class="order-summary" *ngIf="showOrderSummary" (click)="$event.stopPropagation()">
+        <div *ngFor="let item of cartItems">
+          <div class="book-item">
+            <img [src]="item.imagePath" alt="Book Cover" />
+            <div class="book-info">
+              <h4>Title: {{ item.title }}</h4>
+              <p>Author: {{ item.author }}</p>
+              <p>Price: Rs. {{ item.price }}</p>
+            </div>
+          </div>
+        </div>
+        <button class="checkout-button" (click)="handleCheckout()">Checkout</button>
       </div>
     </div>
   </div>
