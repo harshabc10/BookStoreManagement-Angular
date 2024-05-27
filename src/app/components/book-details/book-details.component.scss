@@ -1,143 +1,272 @@
-.bookdetails-outer-cnt{
-    width:100%;
-    padding:1% 0%;
-}
-
-
-.back-to-dashbaord a{
-    text-decoration: none;
+.bookdetails-outer-cnt {
+    width: 100%;
+    padding: 1% 0%;
 }
 
 .breadcrumb {
     padding: 10px 140px;
-    //background-color: #f1f1f1;
-  }
-  
-  .breadcrumb a {
-    color: #a80000;
+    background-color: white;
+}
+
+.breadcrumb a {
+    color: black;
     text-decoration: none;
     margin-right: 5px;
-  }
-  
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
+}
 
-.book-details-cnt{
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.book-details-cnt {
     display: flex;
     flex-direction: row;
-    margin-left:140px
+    margin-left: 140px;
+    
 }
-.del {
-    text-decoration: line-through;
-  }
+
+.book-thumbnails {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.thumbnail-image {
+    width: 50px;
+    height: 75px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.thumbnail-image:hover {
+    border-color: black;
+}
 
 .book-image-and-options {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
     gap: 15px;
 }
 
 .book-image {
     border: 2px solid black;
     height: 300px;
-    width: 220px;
-    
-    padding: 10% 10%;
+    width: 234px;
+    padding: 10%;
     box-shadow: 0 -4px 4px -4px rgba(0, 0, 0, 0.3), /* Top */
-               -4px 0 4px -4px rgba(0, 0, 0, 0.3), /* Left */
+                -4px 0 4px -4px rgba(0, 0, 0, 0.3), /* Left */
                 4px 0 4px -4px rgba(0, 0, 0, 0.3), /* Right */
                 0 6px 6px -2px rgba(0, 0, 0, 0.2); /* Bottom */
- }
-
- .options{
-   display: flex;
-   flex-direction: row;
-   gap: 25px;   
-   margin-left: 35px;
- }
-.cart-button{
-    background-color: maroon;
-    color: white;
+}
+.book-name{
+    font: normal normal normal 14px / 19px Roboto;
+    letter-spacing: 0px;
+    color: #0A0102;
 }
 
-.wishlist-button{
+.options {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+    align-items: center;
+}
+
+.cart-button {
+    background-color: maroon;
+    color: white;
+    width: 150px;
+    height: 34px;
+}
+
+.quantity-update {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.symbol {
+    border: 1px solid black;
+    border-radius: 100%;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.number-of-books {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    height: 24px;
+    width: 40px;
+    align-items: center;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.wishlist-button {
     background-color: gray;
     color: white;
+    width: 150px;
 }
 
 .wishlist-button::before {
-    font-size: 24px; /* Increase the font size for the heart symbol */
-    vertical-align: middle; /* Align the heart symbol vertically */
+    font-size: 24px;
+    vertical-align: middle;
     content: '\2665'; /* Unicode character for heart symbol */
-    margin-right: 10px; /* Add some spacing between the heart symbol and text */
+    margin-right: 5px; /* Add some spacing between the heart symbol and text */
 }
-.book-details{
+.submit{
     display: flex;
     flex-direction: column;
-    gap:2%;
-    padding-right: 5%;
-    width: 85%;
+    align-items: flex-end;
+}
+.already-in-wishlist {
+    //background-color: gray;
+    color: rgb(12, 12, 12);
+    font-size: 15px;
+    vertical-align: middle;
+    width: 150px;
+    text-align: center;
+    line-height: 35px;
+    height: 35px;
+    border-radius: 5px;
 }
 
-.rating-quantity{
+.book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 60%;
+}
+
+.rating-quantity {
     display: flex;
     flex-direction: row;
-    gap:10px;
+    gap: 10px;
+    align-items: center;
+    font: normal normal normal 14px / 19px Roboto;
+    letter-spacing: 0px;
+
+    
 }
 
-.rating{
-    border: 1px solid black;
+.rating {
+
     background-color: green;
     color: white;
+    padding: 2px 5px;
+    
 }
 
 .book-details h2,
 .book-details h3 {
-    margin: 0; /* Remove default margin for heading elements */
+    margin: 0;
 }
 
-/* For horizontal line */
 .book-details hr {
-   
     border-top: 1px solid black;
-    margin: 20px 0; /* Adjust margin as needed */
-  }
-  
-  /* For stars */
-  .stars {
-    font-size: 24px;
-    outline-color:black ;
-    //color: white;
-  }
+    margin: 20px 0;
+}
 
-  .quantity-update{
-    display: flex;
-    flex-direction: row;
-    gap:10px;
+.author-name {
+    width: 130px;
+    font: normal normal normal 16px/13px Roboto;
+    color: #878787;
+}
+
+.quantity {
+    font-size: 13px;
+    color: #878787;
+}
+
+.price {
+    font-size: 20px;
+}
+
+.Delete {
+    text-decoration: line-through;
+    font: normal normal normal 15px/18px Roboto;
+    color: #878787;
+}
+
+.book-det {
+    font: normal normal normal 15px/18px Roboto;
+    color: #878787;
+}
+
+.customer-feedback {
+    background: #F5F5F5;
+    border-radius: 2px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.customer-feedback textarea {
+    width: 100%;
+    height: 63px;
+    background: #FFFFFF;
+    border-radius: 3px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.submit-review {
+    width: 100px;
+    background-color: blue;
+    color: white;
+    margin-top: 10px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.stars {
     margin-top: 5px;
-  }
-  
-  .symbol{
-      border: 1px solid black;
-      border-radius: 100%;
-      height: 24px; 
-      width: 24px; 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &:hover{
-          cursor: pointer;
-      }
-      
-  }
-  
-  .number-of-books{
-      border: 1px solid black;
-      display: flex;
-      justify-content: center;
-      height: 24px; 
-      width: 40px; 
-      padding-top: 3px;
-  }
+}
+
+.reviews {
+    margin-top: 20px;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+.review p {
+    margin: 0;
+}
+
+.review-stars {
+    color: #FFD700;
+    margin: 0;
+}
+
+.review p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.reviewer {
+    font-weight: bold;
+}
+.fonts{
+    gap: 10px;
+}

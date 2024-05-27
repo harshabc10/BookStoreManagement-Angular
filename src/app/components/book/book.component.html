@@ -5,16 +5,16 @@
     </div>
 
     <div class="book-details" >
-      <span class="book-title"><b>{{ book?.title }}</b></span>
+      <span class="book-title">{{ book?.title }}</span>
 
       <span class="book-author">{{ book?.author }}</span>
 
       <div class="quantity-price">
-        <span class="book-rating">4.5 *</span>
-        <span>{{ book?.quantity }}</span>
+        <span class="book-rating">4.5 &#9733;</span>
+        <span class="quantity">({{ book?.quantity }})</span>
       </div>
 
-      <span class="book-price"><b>Rs. {{ book?.price }}</b></span>
+      <span class="book-price"><b>Rs.{{ book?.price }} </b><del class="delete">Rs.699</del></span>
     </div>
   </div>
 </div>

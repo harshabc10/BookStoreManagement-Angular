@@ -25,6 +25,7 @@ export class BooksHeaderComponent implements OnInit {
     private dialog: MatDialog,
     private dataService: DataService,
     private httpService: HttpService,
+    private bookService: BookService,
     private router: Router
   ) {
     matIconRegistry.addSvgIconLiteral("search-icon", domSanitizer.bypassSecurityTrustHtml(SEARCH_ICON));
@@ -34,11 +35,31 @@ export class BooksHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.checkLoginStatus();
-    this.httpService.getBooks().subscribe(res => this.dataService.changeState(res.data));
+    this.fetchBooks();
+    this.fetchCartDetails();
+    this.fetchWishlistBooks();
   }
 
   checkLoginStatus(): boolean {
     return !!localStorage.getItem('authToken');
+  }
+
+  fetchBooks() {
+    this.httpService.getBooks().subscribe(res => this.dataService.changeState(res.data));
+  }
+
+  fetchCartDetails() {
+    if (this.isLoggedIn) {
+      this.bookService.getAllCartDetails().subscribe(res => this.dataService.setCartItems(res.data));
+    } else {
+      this.dataService.getCartItems().subscribe(cartItems => this.dataService.setCartItems(cartItems));
+    }
+  }
+
+  fetchWishlistBooks() {
+    if (this.isLoggedIn) {
+      this.bookService.getAllBooksWishlist().subscribe(res => this.dataService.updateWishlistBooks(res.data));
+    }
   }
 
   login() {
@@ -47,6 +68,8 @@ export class BooksHeaderComponent implements OnInit {
       console.log('The dialog was closed');
       if (result === true) { // Assuming result indicates successful login
         this.isLoggedIn = true;
+        this.fetchCartDetails();
+        this.fetchWishlistBooks();
       }
     });
     this.loginclick = !this.loginclick;

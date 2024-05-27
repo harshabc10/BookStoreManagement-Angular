@@ -2,16 +2,27 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-
+    top: 17px;
+    left: 201px;
+    width: 25%; /* Adjust as needed */
+    height: 26px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal normal 20px/26px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    opacity: 1;
 }
 
-.left-cnt img {
-    margin-right: 10px; /* Adjust as needed for spacing between the image and text */
-}
+// .left-cnt img {
+//     margin-right: 10px; /* Adjust as needed for spacing between the image and text */
+// }
 
-.left-cnt .title {
-    margin: 0; /* Remove default margin for the h3 tag */
-}
+// .left-cnt .title {
+//     margin: 0; /* Remove default margin for the h3 tag */
+// }
+
 
 .header-main-cnt{
     border-bottom: 1px solid black;

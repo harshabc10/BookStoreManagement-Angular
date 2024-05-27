@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BookObj } from 'src/assets/booksInterface';
 
 @Injectable({
@@ -13,19 +13,16 @@ export class DataService {
   currSearchString = this.searchString.asObservable();
 
   private cartItems: { [bookId: number]: BookObj & { quantity: number } } = {};
-  
   private cartItemsSubject = new BehaviorSubject<(BookObj & { quantity: number })[]>([]);
 
   getCartItems(): Observable<(BookObj & { quantity: number })[]> {
     return this.cartItemsSubject.asObservable();
   }
 
-
   private cartItemCount = new BehaviorSubject<number>(0);
   getCartItemCount(): Observable<number> {
     return this.cartItemCount.asObservable();
   }
-
 
   clearCart() {
     this.cartItems = {};
@@ -40,7 +37,6 @@ export class DataService {
 
     if (this.cartItems[book.bookId]) {
       this.cartItems[book.bookId].quantity += quantity;
-      // Prevent quantity from going below 1
       if (this.cartItems[book.bookId].quantity < 1) {
         this.cartItems[book.bookId].quantity = 1;
       }
@@ -53,7 +49,7 @@ export class DataService {
   setCartItems(cartItems: (BookObj & { quantity: number })[]): void {
     this.cartItems = {};
     cartItems.forEach(item => {
-      if (item.bookId !== undefined) { // Ensure bookId is not undefined
+      if (item.bookId !== undefined) {
         this.cartItems[item.bookId] = item;
       } else {
         console.error('Book ID is undefined for item:', item);
@@ -98,41 +94,17 @@ export class DataService {
     this.searchString.next(state);
   }
 
- //////wishlist//////////
- private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
+  private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
   currWishlistBook = this.wishlistBooks.asObservable();
 
-  updateWishlistBooks(book: BookObj) {
-    const currentWishlist = this.wishlistBooks.getValue();
-    this.wishlistBooks.next([...currentWishlist, book]);
+  updateWishlistBooks(books: BookObj[]) {
+    this.wishlistBooks.next(books);
   }
-
-
-  
 
   private address = new BehaviorSubject<number>(0);
   currAddressId = this.address.asObservable();
 
   updateAddressId(addressId: number) {
-    // const currentWishlist = this.wishlistBooks.getValue();
     this.address.next(addressId);
   }
-
-// private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
-// currWishlistBook = this.wishlistBooks.asObservable();
-
-// updateWishlistBooks(books: BookObj[]) {
-//   this.wishlistBooks.next(books);
-// }
-
-  // addToWishlist(book: any) {
-  //   this.wishlistBooks.push(book);
-  // }
-
-  // removeFromWishlist(bookId: number): Observable<void> {
-  //   this.wishlistBooks = this.wishlistBooks.filter(book => book.bookId !== bookId);
-  //   return of();
-  // }
-
-  constructor() {}
 }

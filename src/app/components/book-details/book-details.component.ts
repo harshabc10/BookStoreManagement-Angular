@@ -96,7 +96,7 @@
           });
       } else {
           console.log('Auth token not present. Please log in.');
-          this.dataService.updateWishlistBooks(this.selectedBook);
+          this.dataService.updateWishlistBooks([this.selectedBook]);
         
       }
   }
