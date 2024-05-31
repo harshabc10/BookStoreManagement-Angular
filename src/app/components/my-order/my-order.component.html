@@ -1,0 +1,64 @@
+<!-- <div class="order-container">
+    <div class="breadcrumb">
+      <a href="#" routerLink="/dashboard/books">Home</a> / My Orders({{ orders.length }})
+    </div>
+    <div class="order-list">
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-details">
+          <h3>Order ID: {{ order.order.orderId }}</h3>
+          <p>Date: {{ order.order.orderDate  | date:'MMMM dd'}}</p>
+
+          <div class="book-list">
+            <h4>Books:</h4>
+            <ul>
+              <li *ngFor="let book of order.books">
+                <img src="{{book.imagePath}}" alt="" style="height: 80px ; width: 80px;">
+                {{ book.title }} - Rs. {{ book.price }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="orders.length === 0" class="no-orders">
+        No orders found.
+      </div>
+    </div>
+  </div>
+   -->
+<div class="order-container">
+  <div class="title-nav">
+    <span class="home-nav" routerLink="/dashboard/books">Home</span>
+    <span class="wishlist-nav">/ My OrderList</span>
+  </div>
+  <div class="order-list">
+    <div class="orderlist-heading-cnt">
+      <span>My OrderList ({{orders.length}})</span>
+
+    </div>
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-details">
+        <div class="book-info">
+          <img
+            src="{{ order.books[0].imagePath }}"
+            alt="{{ order.books[0].title }}"
+          />
+          <div class="book-details">
+            <h3>{{ order.books[0].title }}</h3>
+            <p>by {{ order.books[0].author }}</p>
+            <p class="price">
+              Rs. {{ order.books[0].price }}
+              <span class="original-price">Rs. 699</span>
+            </p>
+          </div>
+        </div>
+        <div class="order-meta">
+          <span class="order-status"
+            >● Order Placed on
+            {{ order.order.orderDate | date : "MMMM dd" }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div *ngIf="orders.length === 0" class="no-orders">No orders found.</div>
+  </div>
+</div>

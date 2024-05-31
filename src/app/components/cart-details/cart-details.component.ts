@@ -21,6 +21,7 @@ export class CartDetailsComponent implements OnInit {
   count: number = 1;
   authToken: string | null = null;
   selectedAddressId: number | null = null;
+  placeOrder:boolean=false
 
   constructor(
     private dataService: DataService,
@@ -130,7 +131,9 @@ export class CartDetailsComponent implements OnInit {
 
   handlePlaceOrder() {
     if (this.authToken) {
-      // Handle order placement
+      this.showAddressDetails=!this.showAddressDetails;
+      this.showOrderSummary=!this.showOrderSummary
+      this.placeOrder=!this.placeOrder
     } else {
       this.router.navigate(['/dashboard/books']).then(() => {
         const dialogRef = this.dialog.open(LoginSignupComponent, { data: { value: 'placeOrder', cart: this.cartItems } });

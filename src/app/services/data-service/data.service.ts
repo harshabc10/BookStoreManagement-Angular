@@ -28,6 +28,11 @@ export class DataService {
     this.cartItems = {};
     this.updateCartItemsSubject();
   }
+  private allCartItemsSubject = new BehaviorSubject<any[]>([]);
+  currCartList = this.allCartItemsSubject.asObservable();
+  setAllCartItems(cartItems: any[]) {
+    this.allCartItemsSubject.next(cartItems);
+  }
 
   addToCart(book: BookObj, quantity: number = 1) {
     if (book.bookId === undefined) {
@@ -93,18 +98,34 @@ export class DataService {
   updateSearchString(state: string) {
     this.searchString.next(state);
   }
+  // private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
+  // currWishlistBook = this.wishlistBooks.asObservable();
+
+  // updateWishlistBooks(books: BookObj[]) {
+  //   this.wishlistBooks.next(books);
+  // }
 
   private wishlistBooks = new BehaviorSubject<BookObj[]>([]);
   currWishlistBook = this.wishlistBooks.asObservable();
 
-  updateWishlistBooks(books: BookObj[]) {
-    this.wishlistBooks.next(books);
+  updateWishlistBooks(newBooks: BookObj | BookObj[]) {
+    const currWishlistBook = this.wishlistBooks.getValue();
+    
+    // Ensure newBooks is always an array
+    const updatedBooks = Array.isArray(newBooks) ? newBooks : [newBooks];
+    
+    this.wishlistBooks.next([...currWishlistBook, ...updatedBooks]);
   }
-
   private address = new BehaviorSubject<number>(0);
   currAddressId = this.address.asObservable();
 
   updateAddressId(addressId: number) {
     this.address.next(addressId);
+  }
+  private orders = new BehaviorSubject<any[]>([]);
+  currOrders = this.orders.asObservable();
+
+  updateOrders(orders: any[]) {
+    this.orders.next(orders);
   }
 }

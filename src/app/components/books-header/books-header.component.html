@@ -1,38 +1,148 @@
 <div class="header-main-cnt">
-    <div class="left-cnt">
-        <img src="assets/images/education.png" alt="Image not found">
-        <h3 class="title" routerLink="/dashboard/books">BookStore</h3>
-    </div>
+  <div class="inner-main-cnt">
+    <div class="img-span-search-cntr">
+      <div class="left-cnt">
+        <img src="assets/images/education.png" alt="Image not found" />
+        <span routerLink="/books">BookStore</span>
+      </div>
 
-    <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search..." (input)="handelSerchString()" [(ngModel)]="searchString">
-        <mat-icon class="search-icon" svgIcon="search-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
+      <div class="search-container">
+        <mat-icon
+          class="search-icon"
+          svgIcon="search-icon"
+          aria-hidden="false"
+          aria-label="Search SVG icon"
+        ></mat-icon>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          (input)="handelSerchString()"
+          [(ngModel)]="searchString"
+        />
+        
+      </div>
     </div>
-    <div class="profile" [matMenuTriggerFor]="profileMenu">
-        <mat-icon class="profile-icon" svgIcon="profile-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-        <span>Profile</span>
+    <div class="profile-cart-cnt">
+
+        <div class="profile" [matMenuTriggerFor]="profileMenu">
+          <mat-icon
+            class="profile-icon"
+            svgIcon="profile-icon"
+            aria-hidden="false"
+            aria-label="Search SVG icon"
+          ></mat-icon>
+          <span>Profile</span>
+        </div>
+        <div class="cart" routerLink="/dashboard/cart">
+          <mat-icon
+            class="cart-icon"
+            svgIcon="cart-icon"
+            aria-hidden="false"
+            aria-label="Search SVG icon"
+          ></mat-icon>
+          <span>Cart</span>
+        </div>
     </div>
-    <div class="cart" routerLink="/dashboard/cart">
-        <mat-icon class="cart-icon" svgIcon="cart-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-        <span>Cart</span>
-    </div>
+  </div>
 </div>
 
 <mat-menu #profileMenu>
-    <ng-container *ngIf="isLoggedIn; else loggedOut">
-        <span>Welcome</span><br>
-        <span>To access account and manage orders</span>
-        <button mat-menu-item class="login-btn" (click)="logOut()">Logout</button>
-        <div class="order-icon" (click)="order()">My Orders</div>
-        <div class="heart-icon" (click)="wishlist()">&#x2764; Wishlist</div>
-    </ng-container>
+    <div *ngIf="isLoggedIn; else loggedOut" class="login-signin">
+        <span>Hello {{ userName }}</span>
+      <div class="profile-icon-container">
+        <img src="assets/images/profile.png" alt="Profile Icon" class="profile-icon-img" />
+        <div class="profile-icon-text">Profile</div>
+      </div>
+      <div class="myorders-img-icon" (click)="order()">
+        <img src="assets/images/myorders.png" alt="My Orders Icon" class="order-icon" />
+        <div class="MyOrders">My Orders</div>
+      </div>
+      <div class="wishlist-icon-container" (click)="wishlist()">
+        <img src="assets/images/heart.png" alt="Heart Icon" class="wishlist-icon-img" />
+        <div class="wishlist-icon-text">My Wishlist</div>
+      </div>
+      <div class="login-signup">
+        <button mat-stroked-button color="warn" (click)="logOut()">LOGOUT</button>
+      </div>
+    </div>
     <ng-template #loggedOut>
-        <span>Welcome</span><br>
-        <span>To access account and manage orders</span>
-        <button mat-menu-item class="login-btn" (click)="login()">
-            <span>LOGIN/SIGNUP</span>
-        </button>
-        <div class="order-icon" (click)="order()">My Orders</div>
-        <div class="heart-icon" (click)="wishlist()">&#x2764; Wishlist</div>
+      <div class="span-cnt">
+        <span class="Welcome">Welcome</span>
+        <span class="access">To access account and manage orders</span>
+      </div>
+      <div class="login-signup">
+        <button mat-stroked-button color="warn" (click)="login()">LOGIN/SIGNUP</button>
+      </div>
+      <div class="myorders-img-icon" (click)="order()">
+        <img src="assets/images/myorders.png" alt="My Orders Icon" class="order-icon" />
+        <div class="MyOrders">My Orders</div>
+      </div>
+      <div class="heart-icon" (click)="wishlist()">&#x2764; Wishlist</div>
     </ng-template>
-</mat-menu>
+  </mat-menu>
+  
+
+
+
+  <!-- <mat-menu #Profile="matMenu">
+    <div class="header-profile" *ngIf="loginLogOut">
+      <div class="span-cnt">
+        <span class="Welcome">Welcome</span>
+        <span class="access">To access account and manage orders</span>
+      </div>
+      <div class="login-signup">
+        <button mat-stroked-button color="warn" (click)="login()">
+          LOGIN/SIGNUP
+        </button>
+      </div>
+      <div>
+        <hr />
+      </div>
+      <div class="myorders-img-icon">
+        <img
+          src="assets/images/myorders.png"
+          alt="My Orders Icon"
+          class="order-icon"
+        />
+        <div class="MyOrders" routerLink="/orderList">My Orders</div>
+      </div>
+  
+      <div class="heart-icon" routerLink="/wishList">&#x2764; Wishlist</div>
+    </div>
+    <div *ngIf="!loginLogOut">
+      <div class="login-signin">
+        <span>Hello Dileep Kumar</span>
+        <div class="profile-icon-container">
+          <img
+            src="assets/images/profile.png"
+            alt="Profile Icon"
+            class="profile-icon-img"
+          />
+          <div class="profile-icon-text">Profile</div>
+        </div>
+        <div class="myorders-img-icon">
+          <img
+            src="assets/images/myorders.png"
+            alt="My Orders Icon"
+            class="order-icon"
+          />
+          <div class="MyOrders" routerLink="/orderList">My Orders</div>
+        </div>
+        <div class="wishlist-icon-container" routerLink="/wishList">
+          <img
+            src="assets/images/heart.png"
+            alt="Heart Icon"
+            class="wishlist-icon-img"
+          />
+          <div class="wishlist-icon-text">My Wishlist</div>
+        </div>
+        <div class="login-signup">
+          <button mat-stroked-button color="warn" (click)="logOut()">
+            LOGOUT
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-menu>
+  <router-outlet></router-outlet> -->

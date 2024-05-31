@@ -1,8 +1,9 @@
 .book-outer-container {
     display: flex;
     flex-direction: row;
-    gap: 32px;
+    justify-content: space-between;
     width: 100%;
+    gap: 25px;
     flex-wrap: wrap;
 }
 

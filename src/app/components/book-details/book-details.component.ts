@@ -40,15 +40,17 @@
         });
       });
 
-      this.bookService.getAllCartDetails().subscribe(res => {
-        const v = res.data;
-        for (let i = 0; i < v.length; i++) {
-          if (v[i].bookId === this.selectedBook.bookId) {
-            this.addedToBag = true;
-            this.count = v[i].quantity;
+      if (localStorage.getItem('AuthToken')) {
+        this.dataService.currCartList.subscribe((res: any) => {
+          const result = res;
+          for (let i = 0; i < result.length; i++) {
+            if (result[i].bookId === this.selectedBook.bookId) {
+              this.addedToBag = true;
+              this.count = result[i].quantity;
+            }
           }
-        }
-      });
+        });
+      }
     }
 
     addToBag() {

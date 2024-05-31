@@ -1,0 +1,102 @@
+.order-container {
+  width:74.8%;
+    margin-left: 174px;;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-nav
+{
+    width: 100%;
+    margin-top: 19px;
+}
+.home-nav{
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #9D9D9D;
+}
+.wishlist-nav{
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #0A0102;
+}
+.orderlist-heading-cnt{
+  background: #F5F5F5 0% 0% no-repeat padding-box;
+    border: 1px solid #E4E4E4;
+    border-radius: 1px;
+    padding:17px 6px 14px 36px;
+}
+
+
+.order-list {
+  width: 100%;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-top: 1px solid #E4E4E4;
+    border-left: 1px solid #E4E4E4;
+    border-right: 1px solid #E4E4E4;
+    margin-top: 17px;
+}
+
+.order-card {
+  display: flex;
+  flex-direction: row;
+  gap:38px;  
+  padding:40px 40px 40px 36px; 
+  border-bottom: 1px solid #E4E4E4 ;
+}
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.book-info {
+  display: flex;
+  align-items: center;
+}
+
+.book-info img {
+  height: 80px;
+  width: 60px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.book-details h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.book-details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.price {
+  font-weight: bold;
+  color: #000;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 10px;
+}
+
+.order-meta {
+  text-align: right;
+}
+
+.order-status {
+  color: green;
+  font-weight: bold;
+}
+
+.no-orders {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
+}

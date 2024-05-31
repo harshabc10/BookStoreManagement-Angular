@@ -1,18 +1,13 @@
 .left-cnt {
     display: flex;
+    gap: 6px;
     align-items: center;
-    cursor: pointer;
-    top: 17px;
-    left: 201px;
-    width: 25%; /* Adjust as needed */
-    height: 26px;
-    /* UI Properties */
-    text-align: left;
-    font: normal normal normal 20px/26px Roboto;
-    letter-spacing: 0px;
-    color: #FFFFFF;
-    text-transform: capitalize;
-    opacity: 1;
+    span {
+      color: #ffffff;
+      text-align: left;
+      font: normal normal normal 20px/26px Roboto;
+      letter-spacing: 0px;
+    }
 }
 
 // .left-cnt img {
@@ -25,68 +20,218 @@
 
 
 .header-main-cnt{
-    border-bottom: 1px solid black;
-    background-color: maroon;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding:0 7%;
+  justify-content: center;
+  width: 100%;
+  padding: 14px 0px;
+  height: 32px;
+  background: #a03037 0% 0% no-repeat padding-box;
     //position:fixed;
 }
+.inner-main-cnt {
+    width: 77%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .img-span-search-cntr {
+    display: flex;
+    gap: 42px;
+    width: 70%;
+  }
+
 .title{
     color: white;
-    margin-left: 10px;
+    //margin-left: 10px;
 }
 .search-container
 {
-    display: flex;
-    align-items: center;
-    margin-left: 80px;
+    width: 100%;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  background: #fcfcfc 0% 0% no-repeat padding-box;
+  padding: 5px;
 }
 .search-input {
-    width: 630px; /* Set width of input field */
-    height:28px;
-    padding: 5px; /* Add padding */
-    border-radius: 8px;
-    text-indent: 30px; /* Adjust as needed */
+    width: 70%;
+  border: none;
+  background: #fcfcfc 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  outline: none;
 }
 
 .search-icon {
-    height:20px;
-    width:15px;
-    margin-left: -630px; /* Adjust the left margin as needed */
-    line-height: 0px;
-    padding-bottom: 1px;
+    height: 12px;
+
 }
+.profile-cart-cnt {
+    display: flex;
+    gap: 40px;
+    span {
+      text-align: left;
+      font: normal normal normal 10px/13px Roboto;
+      letter-spacing: 0.45px;
+      color: #ffffff;
+    }
+  }
+  .profile mat-icon {
+    height: 16px;
+  }
 .profile{
     display: flex;
-    flex-direction: column;
-    margin-left: 800px;
-    color: white;
-    font-size: 10px;
-    gap:5px;
-    margin-top: 10px;
-    cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .cart{
     display: flex;
-    flex-direction: column;
-    margin-left: 40px;
-    color: white;
-    font-size: 10px;
-    gap:5px;
-    margin-top: 10px;
-    cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
-.login-btn{
-    border: 1px solid maroon;
-    /* padding: 5px 12px; */
-    border-radius: 5px;
-    margin-bottom: 5px;
-    width: 60%;
-    color: maroon;
-    text-align: center;
-    margin-left: 50px;
+.cart-icon {
+    height: 16px;
+  }
 
-}
+  .span-cnt {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .welcome {
+    text-align: left;
+    font: normal normal medium 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #0a0102;
+  }
+  
+  .access {
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+  }
+  .span-cnt {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .welcome {
+    text-align: left;
+    font: normal normal medium 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #0a0102;
+  }
+  
+  .access {
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+  }
+  
+  .login-signup {
+    width: 127px;
+    border: 1px solid #a03037;
+    border-radius: 2px;
+    margin: 11px 0px 15px 0px;
+  }
+  
+  .login-signup button {
+    width: 100%;
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #a03037;
+    background-color: #ffffff;
+    border: none;
+  }
+  
+  .myorders-img-icon {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    gap: 2px;
+  }
+  
+  .order-icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .MyOrders {
+    cursor: pointer;
+    text-decoration: none;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+    opacity: 1;
+  }
+  
+  .heart-icon {
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+  }
+  
+  .login-signin {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 23px 19px 20px !important;
+    border: none !important;
+    span {
+      text-align: left;
+      font: normal normal medium 12px/16px Roboto;
+      letter-spacing: 0px;
+      color: #0a0102;
+      opacity: 1;
+    }
+  }
+  
+  .profile-icon-container {
+    display: flex;
+    align-items: center;
+    margin: 8px 0px 0px 0px;
+    gap: 2px;
+  }
+  
+  .profile-icon-img {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .profile-icon-text {
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+  }
+  
+  .wishlist-icon-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 2px;
+  }
+  
+  .wishlist-icon-img {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .wishlist-icon-text {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    text-align: left;
+    font: normal normal normal 12px/16px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+  }
+  

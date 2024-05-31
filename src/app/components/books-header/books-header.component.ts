@@ -18,6 +18,7 @@ export class BooksHeaderComponent implements OnInit {
   loginclick: boolean = false;
   searchString: string = '';
   isLoggedIn: boolean = false;
+  userName: string | null = '';
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -35,6 +36,8 @@ export class BooksHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.checkLoginStatus();
+    this.userName = localStorage.getItem('userName');
+
     this.fetchBooks();
     this.fetchCartDetails();
     this.fetchWishlistBooks();
@@ -91,7 +94,7 @@ export class BooksHeaderComponent implements OnInit {
 
   order() {
     if (this.isLoggedIn) {
-      this.router.navigate(['/dashboard/orders']);
+      this.router.navigate(['/dashboard/orderDetails']);
     } else {
       this.login();
     }

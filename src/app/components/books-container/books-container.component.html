@@ -1,7 +1,13 @@
 <div class="books-main-cnt">
-    <div class="headong-content">
-        <h2>Books</h2>
-        <!-- <button>sort by rele</button> -->
+    <div class="books-quantity-sort-cnt">
+        <div class="books-qty">
+            <div class="books-txt">Books</div>
+            <div class="qty">( {{ booksList.length }} Items)</div>
+        </div>
+        <div class="sort-cnt">
+            <div>Sort by relevance</div>
+            <mat-icon svgIcon="drop-down-icon"></mat-icon>
+        </div>
     </div>
     <div class="books">
         <app-book [BookObjList]="booksList"></app-book>

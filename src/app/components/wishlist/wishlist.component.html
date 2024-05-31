@@ -1,26 +1,35 @@
-<div class="wishlist-container">
-  <div class="breadcrumb">
-    <a href="#" routerLink="/dashboard/books">Home</a> / My Wishlist({{ wishlistBooks.length }})
+<div class="wishlist-main-cnt">
+  <div class="title-nav">
+    <span class="home-nav" routerLink="/dashboard/books">Home</span>
+    <span class="wishlist-nav">/ My Wishlist</span>
   </div>
-  <!-- <div class="wishlist-header">
-    <h2>My Wishlist </h2>
-  </div> -->
-  <div class="wishlist-books">
-    <div class="book-card" *ngFor="let book of wishlistBooks">
-      <div class="book-image">
-        <img [src]="book.imagePath" alt="{{ book.title }}" />
-      </div>
+  <div class="wishlist-cnt" *ngIf="wishlistBooks.length > 0">
+    <div class="wishlist-heading-cnt">
+      <span class="wishlist-heading"
+        >My Wishlist ({{ wishlistBooks.length }})</span
+      >
+    </div>
+    <div class="wishlist-books-cnt" *ngFor="let item of wishlistBooks">
+      <img
+        src="{{ item.imagePath }}"
+        alt="image is not found"
+        class="book-image-cnt"
+      />
       <div class="book-details">
-        <h3>{{ book.title }}</h3>
-        <p>by {{ book.author }}</p>
-        <p class="price">Rs. {{ book.price }} <del>Rs.</del></p>
+        <span class="book-name">{{ item.title }}</span>
+        <span class="author-name">{{ item.author }}</span>
+        <span class="price">Rs. {{ item.price }}</span>
       </div>
-      <button mat-icon-button (click)="book.bookId !== undefined && removeFromWishlist(book.bookId)">
-        <mat-icon class="delet-icon" svgIcon="delete-icon" aria-hidden="false" aria-label="Search SVG icon"></mat-icon>
-      </button>
+      <mat-icon
+        class="delete-icon"
+        svgIcon="delete-icon"
+        aria-hidden="false"
+        aria-label="Search SVG icon"
+        (click)="item.bookId !== undefined && removeFromWishlist(item.bookId)"
+      ></mat-icon>
     </div>
-    <div *ngIf="wishlistBooks.length === 0" class="no-books">
-      No books in the wishlist.
-    </div>
+  </div>
+  <div *ngIf="wishlistBooks.length === 0" class="empty-wishlist">
+    <span class="content">Your wishlist is empty</span>
   </div>
 </div>
